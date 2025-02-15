@@ -3,6 +3,8 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 
 import user from './routes/user.js';
+import expense from './routes/expense.js';
+
 
 
 import dotenv from 'dotenv';
@@ -15,7 +17,7 @@ const app = express()
   .use(cookieParser(process.env.COOKIE_SECRET));
 
 app.use('/user', user);
-
+app.use('/expense', expense)
 
 
 app.listen(PORT, () => {
