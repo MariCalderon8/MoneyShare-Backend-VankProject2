@@ -11,3 +11,5 @@ const ShareMember = sequelize.define('share_member', {
     tableName: 'share_member',
     timestamps: false
 });
+
+export default ShareMember;

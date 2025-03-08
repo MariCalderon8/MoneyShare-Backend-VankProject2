@@ -23,3 +23,5 @@ const Notification = sequelize.define('notification', {
     tableName: 'notification',
     timestamps: false
 });
+
+export default Notification;
