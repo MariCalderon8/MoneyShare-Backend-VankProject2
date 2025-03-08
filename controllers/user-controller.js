@@ -22,7 +22,7 @@ class UserController {
         return res.status(200).json({ 
             data: `Tu email leído en tu token es: ${req.dataToken.userEmail}`
         });
-    }
+    } 
 }
 
 
