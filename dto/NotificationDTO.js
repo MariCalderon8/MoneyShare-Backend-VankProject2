@@ -1,11 +1,14 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../database/sequelize.js';
 
-const Notification = sequelize.define('notification', {
+const Notification = sequelize.define('Notification', {
     id_notification: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
+    },
+    id_user: {
+        type: DataTypes.INTEGER
     },
     message: { 
         type: DataTypes.TEXT, 
@@ -24,4 +27,7 @@ const Notification = sequelize.define('notification', {
     timestamps: false
 });
 
+Notification.associate = (models) => {
+    Notification.belongsTo(models.User, { foreignKey: 'id_user' })
+}
 export default Notification;

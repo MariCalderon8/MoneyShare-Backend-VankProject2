@@ -1,16 +1,14 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../database/sequelize.js';
 
-const Expense = sequelize.define('expense', {
+const Expense = sequelize.define('Expense', {
     id_expense: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
     },
     id_share: { 
-        type: DataTypes.INTEGER, 
-        references: { model: Share, key: 'id_share' }, 
-        onDelete: 'CASCADE' 
+        type: DataTypes.INTEGER
     },
     amount: { 
         type: DataTypes.DECIMAL(10,2), 
@@ -27,5 +25,10 @@ const Expense = sequelize.define('expense', {
     tableName: 'expense',
     timestamps: false
 });
+
+Expense.associate = (models) => {
+    Expense.belongsTo(models.Share, { foreignKey: 'id_share' }); // Un Expense es un share
+    Expense.hasMany(models.ExpenseSplit, {foreignKey: 'id_expense'}); // Un Expense tiene muchos ExpenseSplit
+}
 
 export default Expense;

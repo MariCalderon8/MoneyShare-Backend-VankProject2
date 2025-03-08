@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../database/sequelize.js';
 
-const Share = sequelize.define('share', {
+const Share = sequelize.define('Share', {
     id_share: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -25,5 +25,10 @@ const Share = sequelize.define('share', {
     tableName: 'share',
     timestamps: false
 });
+
+Share.associate = (models) => {
+    Share.belongsToMany(models.User, { through: models.ShareMember, foreignKey: 'id_share' }); // Un share tiene muchos usuarios (ShareMembers)
+    Share.hasOne(models.Expense, { foreignKey: 'id_share' }); // Un share tiene un expense
+};
 
 export default Share;
