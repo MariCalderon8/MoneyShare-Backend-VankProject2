@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 
 import user from './routes/user.js';
+import share from './routes/share.js';
 import expense from './routes/expense.js';
 
 import  { connectSequelize } from './database/sequelize.js';
@@ -16,7 +17,8 @@ const app = express()
   .use(cookieParser(process.env.COOKIE_SECRET));
 
 app.use('/user', user);
-app.use('/expense', expense)
+app.use('/share', share)
+app.use('/expense', expense);
 
 async function startServer() {
   try {
