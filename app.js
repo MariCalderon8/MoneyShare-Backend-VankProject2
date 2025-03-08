@@ -5,8 +5,7 @@ import cookieParser from 'cookie-parser';
 import user from './routes/user.js';
 import expense from './routes/expense.js';
 
-
-
+import  { connectSequelize } from './database/sequelize.js';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -19,7 +18,16 @@ const app = express()
 app.use('/user', user);
 app.use('/expense', expense)
 
+async function startServer() {
+  try {
+    await connectSequelize();
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+      console.log(`Servidor corriendo en http://localhost:${PORT}`);
+    });
+  } catch (error) {
+    console.error('Error iniciando la aplicación:', error);
+  } 
+}
 
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
-});
+startServer();
