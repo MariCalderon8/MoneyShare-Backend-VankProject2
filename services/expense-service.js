@@ -5,31 +5,24 @@ class ExpenseService {
     }
 
     async getExpenseByUser(username) {
-        let expenses = await this.expenseRepository.findExpensesByUser(username);
-        return expenses
+        return await this.expenseRepository.findExpensesByUser(username);
     }
 
     async getExpenseByID(expenseID) {
-        let expense = await this.expenseRepository.findExpenseByID(expenseID);
-        return expense
+        return await this.expenseRepository.findExpenseByID(expenseID);
     }
 
     async createExpense(createExpenseDTO) {
-        // Validación de que el gasto ya existe? Se necesita?
-        await this.expenseRepository.createExpense(createExpenseDTO);
-        return createExpenseDTO;
+        return await this.expenseRepository.createExpense(createExpenseDTO);
     }
 
-    async updateExpense(updateExpense, expenseID) {
-        await this.expenseRepository.updateExpense(updateExpense, expenseID);
-        return updateExpense
+    async updateExpense(updateExpenseDTO, expenseID) {
+        return await this.expenseRepository.updateExpense(updateExpenseDTO, expenseID);
     }
 
     async deleteExpense(expenseID) {
-        await this.expenseRepository.deleteExpense(expenseID);
-        return expenseID;
+        return await this.expenseRepository.deleteExpense(expenseID);
     }
-
 
 }
 

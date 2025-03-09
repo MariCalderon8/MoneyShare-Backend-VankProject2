@@ -5,7 +5,7 @@ class ShareService {
     }
 
     async findShareById(id) {
-        return this.shareRepository.findShareById(id);
+        return await this.shareRepository.findShareById(id);
     }
 
     async createShare(shareData) {
@@ -16,7 +16,7 @@ class ShareService {
         return await this.shareRepository.deleteShare(id);
     }
 
-    async updateShare(newData){
+    async updateShare(newData) {
         return await this.shareRepository.updateShare(newData);
     }
 }

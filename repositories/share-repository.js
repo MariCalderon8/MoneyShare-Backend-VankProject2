@@ -3,51 +3,38 @@ import Share from '../dto/ShareDTO.js';
 class ShareRepository {
 
     async findShareById(id) {
-        const share = await Share.findOne({
-            where: { id_share: id }
-        })
-        return share;
+        return await Share.findOne({ where: { id_share: id } });
     }
 
     async createShare(shareData) {
-        let message = "";
         try {
-            await Share.create({
-                name: shareData.name,
-                description: shareData.description,
-                amount: shareData.amount,
-                due_date: shareData.due_date
-            })
-            message = "Share creado"
-
+            const share = await Share.create(shareData);
+            return share;
         } catch (error) {
-            console.error(error);
-            message = "Error al crear usuario"
+            throw new Error('Error al crear Share');
         }
-        return message;
     }
 
-    async deleteShare (id) {
-        const deletedRows = await Share.destroy({
-            where: { id_share: id }
-        });
-
+    async deleteShare(id) {
+        const deletedRows = await Share.destroy({ where: { id_share: id } });
         if (deletedRows > 0) {
-            console.log("Usuario eliminado correctamente.");
+            return 'Share eliminado correctamente';
         } else {
-            console.log("No se encontró el usuario para eliminar.");
+            throw new Error('No se encontró el Share para eliminar');
         }
     }
 
-    async updateShare (newData) {
-        const [updatedRows] = await Share.update(newData, {
-            where: { id_share: newData.id_share }
+    async updateShare(newData) {
+        const [updatedRows] = await Share.update(newData, { 
+            where: { id_share: newData.id_share } 
         });
-    
         if (updatedRows > 0) {
-            console.log("Share actualizado correctamente.");
+            const updatedShare = await Share.findOne({ where: { 
+                id_share: newData.id_share } 
+            });
+            return updatedShare;
         } else {
-            console.log("No se encontró el Share para actualizar.");
+            throw new Error('No se encontró el Share para actualizar');
         }
     }
 }

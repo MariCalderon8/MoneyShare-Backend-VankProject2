@@ -1,5 +1,3 @@
-
-
 class UserService {
 
   constructor(userRepository) {
@@ -7,15 +5,13 @@ class UserService {
   }
 
   async register(info) {
-    let infoRegister = await this.userRepository.register({ name:info.name, email: info.email, username: info.username, password: info.password, balance: info.balance });
-    return infoRegister;
+    return await this.userRepository.register(info);
   }
 
   async login(info) {
-    let infoLogin = await this.userRepository.login({email: info.email, password: info.password});
-    return infoLogin;
+    return await this.userRepository.login(info);
   }
- 
+
 }
 
 export default UserService;

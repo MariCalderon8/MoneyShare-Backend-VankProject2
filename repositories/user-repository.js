@@ -10,55 +10,46 @@ class UserRepository {
   }
 
   async register(info) {
+    const hashedPassword = await bcrypt.hash(info.password, 10);
+    let user = await User.create({
+      id_user: info.id_user,
+      name: info.name,
+      email: info.email,
+      username: info.username,
+      password: hashedPassword,
+      balance: info.balance
+    });
 
-    let message = "";
-    try{
-      const hashedPassword = await bcrypt.hash(info.password, 10);
-      await User.create({
-        id_user: info.id_user,
-        name: info.name,
-        email: info.email,
-        username: info.username,
-        password: hashedPassword,
-        balance: info.balance
-      });
-      message = "Usuario creado"
-
-    }catch(error){
-      console.error(error);
-      message = "Error al crear usuario"
+    if (!user) {
+      throw new Error('Error al crear usuario');
     }
-    return message;
+    return user;
   }
+
 
   async login(info) {
     try {
-      const email = info.email;
-      const password = info.password;
-
-      const user = await User.findOne({
-        where: { email },
-      });
+      const { email, password } = info;
+      const user = await User.findOne({ where: { email } });
 
       if (!user) {
-        return {login: false};
+        return { login: false };
       }
 
       const validPassword = await bcrypt.compare(password, user.password);
-
       if (!validPassword) {
-        return {login: false};
+        return { login: false };
       }
 
       const token = jwt.sign(
         { userEmail: email },
         process.env.JWT_SECRET,
-        { expiresIn: '1h' } 
+        { expiresIn: '1h' }
       );
-      return {login: true, token}
-
+      return { login: true, token };
     } catch (error) {
       console.error(error);
+      throw new Error('Error en la autenticación');
     }
   }
 
