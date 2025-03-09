@@ -1,58 +1,55 @@
-
 class ExpenseController {
 
     constructor(expenseService) {
         this.expenseService = expenseService;
     }
 
-    async findExpenseByID(req, res) {
+    findExpenseByID = async (req, res) => {
         try {
-            return res.status(200).json({
-                data: await this.expenseService.getExpenseByID(req.params.id)
-            });
+            const expense = await this.expenseService.getExpenseByID(req.params.id);
+            if (!expense) {
+                return res.status(404).json({ message: "Gasto no encontrado" });
+            }
+            return res.status(200).json(expense);
         } catch (error) {
-            return res.status(400).json({ message: error.message });
+            return res.status(500).json({ message: error.message });
         }
-    }
+    };
 
-    async findExpenseByUser(req, res) {
+    findExpenseByUser = async (req, res) => {
         try {
-            return res.status(200).json({
-                data: await this.expenseService.getExpenseByUser(req.params.username)
-            });
+            const expenses = await this.expenseService.getExpenseByUser(req.params.username);
+            return res.status(200).json(expenses);
         } catch (error) {
-            return res.status(400).json({ message: error.message });
+            return res.status(500).json({ message: error.message });
         }
-    }
+    };
 
-    async createExpense(req, res) {
+    createExpense = async (req, res) => {
         try {
-            return res.status(201).json({
-                data: await this.expenseService.createExpense(req.body)
-            });
+            const expense = await this.expenseService.createExpense(req.body);
+            return res.status(201).json(expense);
         } catch (error) {
             return res.status(400).json({ message: error.message });
         }
-    }
-    async updateExpense(req, res) {
+    };
+    updateExpense = async (req, res) => {
         try {
-            return res.status(200).json({
-                data: await this.expenseService.updateExpense(req.body, req.body.expenseID)
-            });
+            const updatedExpense = await this.expenseService.updateExpense(req.params.id, req.body);
+            return res.status(200).json(updatedExpense);
         } catch (error) {
             return res.status(400).json({ message: error.message });
         }
-    }
+    };
 
-    async deleteExpense(req, res) {
+    deleteExpense = async (req, res) => {
         try {
-            return res.status(200).json({
-                data: await this.expenseService.deleteExpense(req.params.id)
-            });
+            await this.expenseService.deleteExpense(req.params.id);
+            return res.status(200).json({ message: "Gasto eliminado correctamente" });
         } catch (error) {
             return res.status(400).json({ message: error.message });
         }
-    }
+    };
 
 }
 

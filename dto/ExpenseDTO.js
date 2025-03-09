@@ -7,17 +7,20 @@ const Expense = sequelize.define('Expense', {
         primaryKey: true,
         autoIncrement: true,
     },
-    id_share: { 
-        type: DataTypes.INTEGER
+    id_share: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: { model: "Share", key: "id_share" },
+        onDelete: 'CASCADE'
     },
-    amount: { 
-        type: DataTypes.DECIMAL(10,2), 
-        allowNull: false 
+    amount: {
+        type: DataTypes.DECIMAL(10, 2),
+        allowNull: false
     },
-    category: { 
-        type: DataTypes.STRING(50) 
+    category: {
+        type: DataTypes.STRING(50)
     },
-    date: { 
+    date: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW
     }
@@ -27,8 +30,9 @@ const Expense = sequelize.define('Expense', {
 });
 
 Expense.associate = (models) => {
-    Expense.belongsTo(models.Share, { foreignKey: 'id_share' }); // Un Expense es un share
-    Expense.hasMany(models.ExpenseSplit, {foreignKey: 'id_expense'}); // Un Expense tiene muchos ExpenseSplit
-}
+    Expense.belongsTo(models.Share, { foreignKey: 'id_share', onDelete: 'CASCADE' }); 
+    Expense.hasMany(models.ExpenseSplit, { foreignKey: 'id_expense', onDelete: 'CASCADE' });
+};
+
 
 export default Expense;

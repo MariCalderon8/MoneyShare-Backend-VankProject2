@@ -1,11 +1,21 @@
+import ExpenseSplit from "../dto/ExpenseSplit.js";
+import Expense from "../dto/ExpenseDTO.js";
+
 class ExpenseRepository {
 
   async findExpensesByUser(username) {
-    return `Los gastos de ${username} son: gasto1, gasto2, gasto3`
+    return await Expense.findAll({
+      include: [
+        {
+          model: ExpenseSplit,
+          where: { id_user: username },
+        },
+      ],
+    });
   }
 
   async findExpenseByID(expenseID) {
-    return `Viaje a Santa Marta`
+    return await Expense.findOne({ where: { id_expense: expenseID } });
   }
 
   async createExpense(info) {
@@ -16,16 +26,28 @@ class ExpenseRepository {
     return expense;
   }
 
+  // async updateExpense(info, expenseID) {
+  //   const expense = await Expense.update(info, { where: { id: expenseID } });
+  //   if (!expense) {
+  //     throw new Error('Error al modificar gasto');
+  //   }
+  //   return expense;
+  // }
+
   async updateExpense(info, expenseID) {
-    const expense = await Expense.update(info, { where: { id: expenseID } });
-    if (!expense) {
-      throw new Error('Error al modificar gasto');
+    const updatedRows = await Expense.update(info, {
+      where: { id_expense: expenseID },
+      returning: true, // Devuelve el objeto actualizado
+    });
+
+    if (!updatedRows[1][0]) {
+      throw new Error("Error al modificar gasto o no encontrado.");
     }
-    return expense;
+    return updatedRows[1][0];
   }
 
   async deleteExpense(expenseID) {
-    const deleted = await Expense.destroy({ where: { id: expenseID } });
+    const deleted = await Expense.destroy({ where: { id_expense: expenseID } });
     if (!deleted) {
       throw new Error('Error al eliminar gasto');
     }
