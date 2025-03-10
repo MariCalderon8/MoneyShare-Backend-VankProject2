@@ -7,6 +7,21 @@ const Share = sequelize.define('Share', {
         primaryKey: true,
         autoIncrement: true,
     },
+    id_creator: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: { model: "User", key: "id_user" },
+        onDelete: 'CASCADE'
+    },
+    share_type: {
+        type: DataTypes.ENUM('share_expense', 'share_goal', 'share_debt'),
+        allowNull: false,
+    },
+    code: {
+        type: DataTypes.STRING(100),
+        allowNull: false,
+        unique: true
+    },
     name: { 
         type: DataTypes.STRING(100), 
         allowNull: false 
@@ -16,7 +31,19 @@ const Share = sequelize.define('Share', {
     },
     amount: { 
         type: DataTypes.DECIMAL(10,2), 
-        allowNull: false 
+        defaultValue: 0 
+    },
+    paid_amount: { //Este aplica sólo para goals y debts
+        type: DataTypes.DECIMAL(10,2), 
+        defaultValue: 0
+    },
+    status: {
+        type: DataTypes.ENUM('active', 'completed', 'expired'),
+        allowNull: false,
+    },
+    start_date: {
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW 
     },
     due_date: { 
         type: DataTypes.DATE 
@@ -27,8 +54,11 @@ const Share = sequelize.define('Share', {
 });
 
 Share.associate = (models) => {
-    Share.belongsToMany(models.User, { through: models.ShareMember, foreignKey: 'id_share' }); // Un share tiene muchos usuarios (ShareMembers)
-    Share.hasOne(models.Expense, { foreignKey: 'id_share' }); // Un share tiene un expense
+    Share.belongsToMany(models.User, { through: 'share_member', foreignKey: 'id_share' }); // Un share tiene muchos usuarios (ShareMembers)
+    Share.belongsTo(models.User, { foreignKey: 'id_user', onDelete: 'CASCADE' }); // Un share es creado por un usuario
+    Share.hasMany(models.Expense, { foreignKey: 'id_share', onDelete: 'CASCADE' }); // Un share tiene un expense
+    Share.hasMany(models.ShareSplit, { foreignKey: 'id_split', onDelete: 'CASCADE' });
+
 };
 
 export default Share;

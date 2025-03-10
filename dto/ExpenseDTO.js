@@ -13,6 +13,12 @@ const Expense = sequelize.define('Expense', {
         references: { model: "Share", key: "id_share" },
         onDelete: 'CASCADE'
     },
+    id_user: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: { model: "User", key: "id_user" },
+        onDelete: 'CASCADE'
+    },
     amount: {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: false
@@ -31,7 +37,7 @@ const Expense = sequelize.define('Expense', {
 
 Expense.associate = (models) => {
     Expense.belongsTo(models.Share, { foreignKey: 'id_share', onDelete: 'CASCADE' }); 
-    Expense.hasMany(models.ExpenseSplit, { foreignKey: 'id_expense', onDelete: 'CASCADE' });
+    Expense.belongsTo(models.User, { foreignKey: 'id_user', onDelete: 'CASCADE' });
 };
 
 

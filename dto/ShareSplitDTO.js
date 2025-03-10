@@ -1,16 +1,16 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../database/sequelize.js';
 
-const ExpenseSplit = sequelize.define('ExpenseSplit', {
+const ShareSplit = sequelize.define('ShareSplit', {
     id_split: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
     },
-    id_expense: {
+    id_share: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        references: { model: "Expense", key: "id_expense" },
+        references: { model: "Share", key: "id_share" },
         onDelete: 'CASCADE'
     },
     id_user: {
@@ -25,15 +25,23 @@ const ExpenseSplit = sequelize.define('ExpenseSplit', {
     assigned_amount: {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: false
+    },
+    paid: {
+        type: DataTypes.DECIMAL(10, 2),
+        allowNull: false
+    },
+    balance: {
+        type: DataTypes.DECIMAL(10, 2),
+        allowNull: false
     }
 }, {
-    tableName: 'expense_split',
+    tableName: 'share_split',
     timestamps: false
 });
 
-ExpenseSplit.associate = (models) => {
-    ExpenseSplit.belongsTo(models.Expense, { foreignKey: 'id_expense', onDelete: 'CASCADE' });
-    ExpenseSplit.belongsTo(models.User, { foreignKey: 'id_user', onDelete: 'CASCADE' });
+ShareSplit.associate = (models) => {
+    ShareSplit.belongsTo(models.Share, { foreignKey: 'id_share', onDelete: 'CASCADE' });
+    ShareSplit.belongsTo(models.User, { foreignKey: 'id_user', onDelete: 'CASCADE' });
 };
 
-export default ExpenseSplit;
+export default ShareSplit;
