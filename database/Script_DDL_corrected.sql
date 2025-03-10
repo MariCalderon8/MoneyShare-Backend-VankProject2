@@ -5,17 +5,20 @@ CREATE TABLE "user" (
     id_user SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
-    username VARCHAR(100) UNIQUE NOT NULL,
+    username VARCHAR(20) UNIQUE NOT NULL,
     password VARCHAR(100) NOT NULL,
-    balance DECIMAL(10,2) DEFAULT 0
+    tel VARCHAR(20) NOT NULL
 );
 
 CREATE TYPE share_status AS ENUM ('active', 'completed', 'expired');
+CREATE TYPE share_type AS ENUM ('share_expense', 'share_goal', 'share_debt');
 
 --Shares table
 CREATE TABLE "share" (
     id_share SERIAL PRIMARY KEY,
     id_creator INT REFERENCES "user"(id_user) ON DELETE CASCADE,
+    code VARCHAR(20) UNIQUE NOT NULL,
+    type share_type NOT NULL,
     name VARCHAR(100) NOT null,
     description text,
     amount DECIMAL(10,2) DEFAULT 0,
@@ -38,17 +41,19 @@ CREATE TABLE "expense" (
     id_share INT REFERENCES "share"(id_share) ON DELETE CASCADE,
    	id_user INT REFERENCES "user"(id_user) ON DELETE CASCADE,
     amount DECIMAL(10,2) NOT NULL,
-    category VARCHAR(50),
+    category VARCHAR(50), --Más adelante puede ser un ENUM
     date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 --Expense distribution table
-CREATE TABLE "expense_split" (
+CREATE TABLE "share_split" (
     id_split SERIAL PRIMARY KEY,
     id_share INT REFERENCES "share"(id_share) ON DELETE CASCADE,
     id_user INT REFERENCES "user"(id_user) ON DELETE CASCADE,
     percentage DECIMAL(5,2),
-    assigned_amount DECIMAL(10,2) NOT NULL
+    assigned_amount DECIMAL(10,2) NOT NULL,
+    paid DECIMAL(10,2) DEFAULT 0 NOT NULL,
+    balance DECIMAL(10,2) DEFAULT 0 NOT NULL 
 );
 /*
 -- Debts and Loans table
@@ -97,18 +102,19 @@ CREATE TABLE "notification" (
 
 --Members of each Share
 CREATE VIEW view_share_members AS
-SELECT u.name AS user_name, s.name AS share_name
+SELECT u.id_user AS id_user, s.id_share AS id_share, u.name AS user_name, u.email AS user_email, s.name AS share_name
 FROM "share_member" sm
 JOIN "user" u ON sm.id_user = u.id_user
 JOIN "share" s ON sm.id_share = s.id_share;
 
+/*
 --Expense summary per share
 CREATE VIEW view_expense_summary AS
 SELECT s.name AS share_name, SUM(e.amount) AS total_expenses
 FROM "expense" e
 JOIN "share" s ON e.id_share= s.id_share
 GROUP BY s.name;
-
+*/
 -- DROP type notification_type ;
 -- DROP TYPE payment_options;
 

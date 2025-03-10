@@ -13,7 +13,7 @@ const Share = sequelize.define('Share', {
         references: { model: "User", key: "id_user" },
         onDelete: 'CASCADE'
     },
-    share_type: {
+    type: {
         type: DataTypes.ENUM('share_expense', 'share_goal', 'share_debt'),
         allowNull: false,
     },
