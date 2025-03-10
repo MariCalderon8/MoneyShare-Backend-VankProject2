@@ -11,8 +11,8 @@ const shareService = new ShareService(shareRepository);
 const shareController = new ShareController(shareService);
 
 router.get('/find/:id', verifyToken, shareController.findShareById)
-router.post('/create', verifyToken, shareController.createShare);
-router.delete('/delete/:id', verifyToken, shareController.deleteShare);
+router.post('/create', verifyToken, createShareValidator.createShareValidator, shareValidator.validatorShare, shareController.createShare);
+router.delete('/delete/:id', verifyToken, shareValidator.updateShareValidator, shareValidator.validatorShare, shareController.deleteShare);
 router.patch('/update', verifyToken, shareController.updateShare);
 
 export default router;

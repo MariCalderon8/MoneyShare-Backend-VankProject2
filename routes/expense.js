@@ -12,8 +12,8 @@ const expenseController = new ExpenseController(expenseService);
 
 router.get('/:id', verifyToken, expenseController.findExpenseByID)
 router.get('/user/:username', verifyToken, expenseController.findExpenseByUser)
-router.post('/createExpense', verifyToken, expenseController.createExpense);
-router.put('/updateExpense', verifyToken, expenseController.updateExpense);
+router.post('/createExpense', verifyToken, expenseValidator.createExpenseValidator, expenseValidator.validatorExpense, expenseController.createExpense);
+router.put('/updateExpense', verifyToken, expenseValidator.updateExpenseValidator, expenseValidator.validatorExpense,expenseController.updateExpense);
 router.delete('/deleteExpense/:id', verifyToken, expenseController.deleteExpense);
 
 export default router;
