@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import user from './routes/user.js';
 import share from './routes/share.js';
 import expense from './routes/expense.js';
+import shareSplit from './routes/shareSplit.js';
 
 import  { connectSequelize } from './database/sequelize.js';
 import dotenv from 'dotenv';
@@ -19,6 +20,7 @@ const app = express()
 app.use('/user', user);
 app.use('/share', share)
 app.use('/expense', expense);
+app.use('/share-split', shareSplit);
 
 async function startServer() {
   try {
