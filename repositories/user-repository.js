@@ -17,7 +17,7 @@ class UserRepository {
       email: info.email,
       username: info.username,
       password: hashedPassword,
-      balance: info.balance
+      tel: info.tel
     });
 
     if (!user) {
@@ -29,20 +29,19 @@ class UserRepository {
 
   async login(info) {
     try {
-      const { email, password } = info;
-      const user = await User.findOne({ where: { email } });
+      const user = await User.findOne({ where: { email: info.email } });
 
       if (!user) {
         return { login: false };
       }
 
-      const validPassword = await bcrypt.compare(password, user.password);
+      const validPassword = await bcrypt.compare(info.password, user.password);
       if (!validPassword) {
         return { login: false };
       }
 
       const token = jwt.sign(
-        { userEmail: email },
+        { userEmail: info.email },
         process.env.JWT_SECRET,
         { expiresIn: '1h' }
       );

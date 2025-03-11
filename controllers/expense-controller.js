@@ -35,9 +35,10 @@ class ExpenseController {
     };
     updateExpense = async (req, res) => {
         try {
-            const updatedExpense = await this.expenseService.updateExpense(req.params.id, req.body);
+            const updatedExpense = await this.expenseService.updateExpense(req.body, req.params.id);
             return res.status(200).json(updatedExpense);
         } catch (error) {
+            console.error(error);
             return res.status(400).json({ message: error.message });
         }
     };

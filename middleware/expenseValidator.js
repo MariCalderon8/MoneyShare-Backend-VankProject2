@@ -1,4 +1,4 @@
-import { check } from "express-validator";
+import { check, validationResult } from "express-validator";
 
 const createExpenseValidator = [
     check('id_share')
@@ -34,26 +34,16 @@ const updateExpenseValidator = [
 
 ];
 
-const createExpenseSplitValidator = [
-    check('id_expense')
-    .isInt()
-    .withMessage('El id del gasto es obligatorio y debe ser un número válido'),
-    check('id_user')
-    .isInt()
-    .withMessage('El id del usuario es obligatorio y debe ser un número válido'),
-    check('percentage')
-    .optional()
-    .isFloat({ min: 0.01, max: 100 })
-    .withMessage('El porcentaje debe ser un número válido y mayor a 0 y menor a 100'),
-    check('assigned_amount')
-    .isFloat({ min: 0.01 })
-    .withMessage('El monto asignado debe ser un número válido y mayor a 0'),
-];
-
 function validatorExpense(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
     }
     next();
+}
+
+export default {
+    createExpenseValidator,
+    updateExpenseValidator,
+    validatorExpense
 }

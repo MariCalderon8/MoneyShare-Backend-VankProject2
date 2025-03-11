@@ -1,18 +1,6 @@
-import ExpenseSplit from "../dto/ExpenseSplit.js";
 import Expense from "../dto/ExpenseDTO.js";
 
 class ExpenseRepository {
-
-  async findExpensesByUser(username) {
-    return await Expense.findAll({
-      include: [
-        {
-          model: ExpenseSplit,
-          where: { id_user: username },
-        },
-      ],
-    });
-  }
 
   async findExpenseByID(expenseID) {
     return await Expense.findOne({ where: { id_expense: expenseID } });
@@ -34,16 +22,23 @@ class ExpenseRepository {
   //   return expense;
   // }
 
-  async updateExpense(info, expenseID) {
-    const updatedRows = await Expense.update(info, {
-      where: { id_expense: expenseID },
-      returning: true, // Devuelve el objeto actualizado
+  async updateExpense(expenseData, expenseID) {
+    const [updatedRows] = await Expense.update(expenseData, {
+      where: { id_expense: Number(expenseID) }
     });
+    console.log(expenseData, expenseID);
+    console.log(updatedRows);
 
-    if (!updatedRows[1][0]) {
-      throw new Error("Error al modificar gasto o no encontrado.");
+    if (updatedRows > 0) {
+      const updatedExpense = await Expense.findOne({
+        where: {
+          id_expense: Number(expenseID)
+        }
+      });
+      return updatedExpense;
+    } else {
+      throw new Error('No se encontró el expense para actualizar');
     }
-    return updatedRows[1][0];
   }
 
   async deleteExpense(expenseID) {

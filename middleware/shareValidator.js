@@ -1,4 +1,4 @@
-import { check } from "express-validator";
+import { check, validationResult } from "express-validator";
 
 const createShareValidator = [
     check('name')
@@ -57,7 +57,7 @@ function validatorShare(req, res, next) {
     next();
 }
 
-export {
+export default{
     createShareValidator,
     addMemberValidator,
     updateShareValidator,
