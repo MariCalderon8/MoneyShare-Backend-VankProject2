@@ -6,6 +6,10 @@ class ShareRepository {
         return await Share.findOne({ where: { id_share: id } });
     }
 
+    async findShareByCode(code) {
+        return await Share.findOne({ where: { code: code } });
+    }
+
     async createShare(shareData) {
         try {
             const share = await Share.create(shareData);

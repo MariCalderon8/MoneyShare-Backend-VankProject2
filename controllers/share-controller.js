@@ -13,6 +13,15 @@ class ShareController {
         }
     };
 
+    findShareByCode = async (req, res) => {
+        try {
+            const data = await this.shareService.findShareByCode(req.params.code);
+            return res.status(200).json({ data });
+        } catch (error) {
+            return res.status(500).json({ message: 'Error al buscar el Share', error: error.message });
+        }
+    };
+
     createShare = async (req, res) => {
         try {
             const data = await this.shareService.createShare(req.body);

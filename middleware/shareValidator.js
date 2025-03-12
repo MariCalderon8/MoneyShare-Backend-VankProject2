@@ -9,9 +9,6 @@ const createShareValidator = [
     .optional()
     .isString()
     .withMessage('La descripción debe ser un texto válido'),
-    check('amount')
-    .isFloat({ min: 0.01 })
-    .withMessage('El monto debe ser un número válido y mayor a 0'),
     check('due_date')
     .optional()
     .isISO8601()
