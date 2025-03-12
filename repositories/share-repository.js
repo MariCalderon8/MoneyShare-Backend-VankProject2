@@ -41,6 +41,7 @@ class ShareRepository {
             throw new Error('No se encontró el Share para actualizar');
         }
     }
+    
 }
 
 export default ShareRepository;

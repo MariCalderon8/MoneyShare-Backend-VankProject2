@@ -117,5 +117,3 @@ GROUP BY s.name;
 */
 -- DROP type notification_type ;
 -- DROP TYPE payment_options;
-
-

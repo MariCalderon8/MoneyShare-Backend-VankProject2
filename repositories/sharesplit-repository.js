@@ -23,8 +23,11 @@ class ShareSplitRepository {
         })
     }
 
-    async createSplit(splitData) {
-        const split = await ShareSplit.create(splitData);
+    async createSplit(userId, shareId) {
+        const split = await ShareSplit.create({
+            id_user: userId,
+            id_share: shareId
+        });
         return split;
     }
 
@@ -44,6 +47,15 @@ class ShareSplitRepository {
             }
         })
     }
+
+    async findShareMember(shareId, userId) {
+        return await ShareSplit.findOne({ 
+            where: { 
+                id_share: shareId, 
+                id_user: userId } 
+            });
+    }
+
 }
 
 export default ShareSplitRepository;
