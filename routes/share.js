@@ -21,6 +21,9 @@ router.get('/find/code/:code', verifyToken, shareController.findShareByCode)
 router.post('/create', verifyToken, shareValidator.createShareValidator, shareValidator.validatorShare, shareController.createShare);
 router.delete('/delete/:id', verifyToken, shareController.deleteShare);
 router.patch('/update', verifyToken, shareValidator.updateShareValidator, shareValidator.validatorShare, shareController.updateShare);
+
 router.post('/members', verifyToken, shareController.addMember);
+router.patch('/percentages/:shareId', verifyToken, shareController.modifySplitsPercentages);
+
 
 export default router;

@@ -38,10 +38,14 @@ class ShareSplitService {
         if (this.validatePercentages(percentages)) {
             console.log(percentages);
             for (const data of percentages) {
-                let paidAmount = await this.findSplitByUserShare(data.id_user, share.id_share).paid;
+                let split = await this.findSplitByUserShare(share.id_share, data.id_user);
+                console.log(split);
+                let paidAmount = split.paid;
                 let assignedAmount = (share.amount * data.percentage) / 100;
                 let balance = paidAmount - assignedAmount;
-
+                console.log(paidAmount);
+                console.log(assignedAmount);
+                console.log(balance);
                 let splitData = {
                     percentage: data.percentage,
                     assigned_amount: assignedAmount,

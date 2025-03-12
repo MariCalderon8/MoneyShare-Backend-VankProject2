@@ -53,6 +53,11 @@ class ShareService {
         await this.shareSplitService.createSplit(userId, share, splitEqually);
     }
 
+    async modifySplitsPercentages(shareId, percentages){
+        let share = await this.findShareById(shareId);
+        return await this.shareSplitService.modifyPercentage(share, percentages);
+    }
+
     // async addMemberAndSplit(shareId, userId) {
     //     const share = await this.shareRepository.findShareById(shareId);
     //     //Borrar este console

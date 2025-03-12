@@ -60,6 +60,16 @@ class ShareController {
         }
     }
 
+    modifySplitsPercentages = async (req, res) => {
+        try {
+            const modifyPercentages = await this.shareService.modifySplitsPercentages(req.params.shareId, req.body);
+            return res.status(200).json({ data: modifyPercentages });
+        } catch (error) {
+            console.error(error);
+            return res.status(400).json({ message: error.message });
+        }
+    }
+
     // addMember = async (req, res) => {
     //     try{
     //         const { id } = req.params;
