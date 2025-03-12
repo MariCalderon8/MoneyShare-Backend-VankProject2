@@ -52,7 +52,7 @@ class ShareController {
 
     addMember = async (req, res) => {
         try{
-            const addMember = await this.shareService.addMember(req.body.code, req.body.id_user);
+            const addMember = await this.shareService.addMember(req.body.code, req.body.id_user, req.body.split_equally);
             return res.status(200).json({ data: addMember });
         } catch (error) {
             console.error(error);

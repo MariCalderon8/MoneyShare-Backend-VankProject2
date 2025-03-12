@@ -45,13 +45,12 @@ class ShareService {
         return await this.shareRepository.updateShare(newData);
     }
 
-    async addMember(code, userId){
+    async addMember(code, userId, splitEqually){
         let share = await this.findShareByCode(code);
         if(!share) {
             throw new Error('Share no encontrado');
         }
-        await this.shareRepository.addMember(share, userId);
-        // await this.shareSplitService.createSplit(share.id_share, userId);
+        await this.shareSplitService.createSplit(userId, share, splitEqually);
     }
 
     // async addMemberAndSplit(shareId, userId) {

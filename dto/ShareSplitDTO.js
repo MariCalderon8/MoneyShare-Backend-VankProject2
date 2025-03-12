@@ -21,6 +21,8 @@ const ShareSplit = sequelize.define('ShareSplit', {
     },
     percentage: {
         type: DataTypes.DECIMAL(5, 2),
+        allowNull: false,
+        defaultValue: 0
     },
     assigned_amount: {
         type: DataTypes.DECIMAL(10, 2),

@@ -1,8 +1,7 @@
 class ShareSplitService {
 
-    constructor(shareSplitRepository, shareService) {
+    constructor(shareSplitRepository) {
         this.shareSplitRepository = shareSplitRepository;
-        this.shareService = shareService;
     }
 
     async findSplitById(splitId) {
@@ -17,12 +16,13 @@ class ShareSplitService {
         return await this.shareSplitRepository.findSplitsByShare(shareId);
     }
 
-    async createSplit(splitData) {
+    async createSplit(idUser, share, splitEqually) {
         //TODO: split equally ???, un usuario sólo puede tener un split por share
-        const share = await this.shareService.findShareById(splitData.id_share);
-        let assignedAmount = share.amount * splitData.percentage / 100;
-        splitData.assigned_amount = assignedAmount; //Falta implementar
-        return await this.shareSplitRepository.createSplit(splitData.id_user, splitData.id_share);
+        console.log(share.id_share);
+        await this.shareSplitRepository.createSplit(idUser, share.id_share);
+        if(splitEqually){
+            await this.splitEqually(share);
+        }
     }
 
     async deleteSplit(splitId) {
@@ -34,12 +34,11 @@ class ShareSplitService {
         return await this.shareSplitRepository.updateSplit(splitData, userId, shareId);
     }
 
-    async modifyPercentage(shareId, percentages) {
+    async modifyPercentage(share, percentages) {
         if (this.validatePercentages(percentages)) {
-            const share = await this.shareService.findShareById(shareId);
             console.log(percentages);
             for (const data of percentages) {
-                let paidAmount = await this.findSplitByUserShare(data.id_user, shareId).paid;
+                let paidAmount = await this.findSplitByUserShare(data.id_user, share.id_share).paid;
                 let assignedAmount = (share.amount * data.percentage) / 100;
                 let balance = paidAmount - assignedAmount;
 
@@ -48,7 +47,7 @@ class ShareSplitService {
                     assigned_amount: assignedAmount,
                     balance: balance
                 }
-                await this.updateSplit(splitData, data.id_user, shareId)
+                await this.updateSplit(splitData, data.id_user, share.id_share)
             }
         }
     }
@@ -66,9 +65,8 @@ class ShareSplitService {
     }
 
     //Se llama al añadir un miembro, eliminar un split o cuando se desee
-    async splitEqually(shareId) {
-        const splits = await this.findSplitsByShare(shareId);
-        const share = await this.shareService.findShareById(shareId);
+    async splitEqually(share) {
+        const splits = await this.findSplitsByShare(share.id_share);
 
         if (splits.length === 0) {
             throw new Error("No hay splits para dividir el monto.");
@@ -84,7 +82,7 @@ class ShareSplitService {
                 assigned_amount: assignedAmount,
                 balance: balance
             }
-            await this.updateSplit(splitData, split.id_user, shareId)
+            await this.updateSplit(splitData, split.id_user, share.id_share)
         }
     }
 }
