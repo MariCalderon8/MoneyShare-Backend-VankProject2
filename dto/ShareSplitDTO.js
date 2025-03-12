@@ -24,6 +24,7 @@ const ShareSplit = sequelize.define('ShareSplit', {
     },
     assigned_amount: {
         type: DataTypes.DECIMAL(10, 2),
+        defaultValue: 0,
         allowNull: false
     },
     paid: {

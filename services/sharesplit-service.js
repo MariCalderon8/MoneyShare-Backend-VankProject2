@@ -20,11 +20,9 @@ class ShareSplitService {
     async createSplit(splitData) {
         //TODO: split equally ???, un usuario sólo puede tener un split por share
         const share = await this.shareService.findShareById(splitData.id_share);
-        console.log(share);
-        console.log(share.amount);
         let assignedAmount = share.amount * splitData.percentage / 100;
-        splitData.assigned_amount = assignedAmount;
-        return await this.shareSplitRepository.createSplit(splitData);
+        splitData.assigned_amount = assignedAmount; //Falta implementar
+        return await this.shareSplitRepository.createSplit(splitData.id_user, splitData.id_share);
     }
 
     async deleteSplit(splitId) {
