@@ -54,8 +54,8 @@ const Share = sequelize.define('Share', {
 });
 
 Share.associate = (models) => {
-    Share.belongsToMany(models.User, { through: 'share_member', foreignKey: 'id_share' }); // Un share tiene muchos usuarios (ShareMembers)
-    Share.belongsTo(models.User, { foreignKey: 'id_user', onDelete: 'CASCADE' }); // Un share es creado por un usuario
+    Share.belongsToMany(models.User, { through: 'share_member', foreignKey: 'id_share', otherKey: 'id_user', timestamps: false}); // Un share tiene muchos usuarios (ShareMembers)
+    Share.belongsTo(models.User, { foreignKey: 'id_creator', onDelete: 'CASCADE' }); // Un share es creado por un usuario
     Share.hasMany(models.Expense, { foreignKey: 'id_share', onDelete: 'CASCADE' }); // Un share tiene un expense
     Share.hasMany(models.ShareSplit, { foreignKey: 'id_split', onDelete: 'CASCADE' });
 

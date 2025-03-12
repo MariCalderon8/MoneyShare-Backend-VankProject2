@@ -52,17 +52,27 @@ class ShareController {
 
     addMember = async (req, res) => {
         try{
-            const { id } = req.params;
-            const { userId } = req.body;
-
-            console.log("Agregando usuario", userId, "al share", id);
-            
-            const updatedShare = await this.shareService.addMemberAndSplit(id, userId);
-            return res.status(200).json({ data: updatedShare });
-        }catch(error){
-            return res.status(500).json({ message: 'Error al agregar miembro', error: error.message });
+            const addMember = await this.shareService.addMember(req.body.code, req.body.id_user);
+            return res.status(200).json({ data: addMember });
+        } catch (error) {
+            console.error(error);
+            return res.status(400).json({ message: error.message });
         }
-    };
+    }
+
+    // addMember = async (req, res) => {
+    //     try{
+    //         const { id } = req.params;
+    //         const { userId } = req.body;
+
+    //         console.log("Agregando usuario", userId, "al share", id);
+            
+    //         const updatedShare = await this.shareService.addMemberAndSplit(id, userId);
+    //         return res.status(200).json({ data: updatedShare });
+    //     }catch(error){
+    //         return res.status(500).json({ message: 'Error al agregar miembro', error: error.message });
+    //     }
+    // };
 }
 
 export default ShareController;

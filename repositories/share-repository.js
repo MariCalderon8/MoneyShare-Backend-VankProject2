@@ -1,4 +1,6 @@
 import Share from '../dto/ShareDTO.js';
+import  { sequelize } from '../database/sequelize.js';
+
 
 class ShareRepository {
 
@@ -7,7 +9,9 @@ class ShareRepository {
     }
 
     async findShareByCode(code) {
-        return await Share.findOne({ where: { code: code } });
+        return await Share.findOne({ 
+            where: { code: code }
+        });
     }
 
     async createShare(shareData) {
@@ -40,6 +44,16 @@ class ShareRepository {
         } else {
             throw new Error('No se encontró el Share para actualizar');
         }
+    }
+
+    //TODO: Modelo Share_member
+    async addMember(share, userId){
+        console.log(userId);
+        const ShareMember = sequelize.models.share_member;
+        return await ShareMember.create({
+            id_share: share.id_share,
+            id_user: userId
+        });    
     }
     
 }

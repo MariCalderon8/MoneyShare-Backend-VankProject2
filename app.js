@@ -8,6 +8,8 @@ import expense from './routes/expense.js';
 import shareSplit from './routes/shareSplit.js';
 
 import  { connectSequelize } from './database/sequelize.js';
+import { models } from './dto/initializeDTOS.js';
+
 import dotenv from 'dotenv';
 dotenv.config();
 

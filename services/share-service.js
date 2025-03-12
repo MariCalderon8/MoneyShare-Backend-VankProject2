@@ -33,8 +33,7 @@ class ShareService {
     }
 
     async validateCode(code) {
-        let share = this.findShareByCode(code);
-        // return share.data == null;
+        let share = await this.findShareByCode(code);
         return !share;
     }
 
@@ -46,27 +45,36 @@ class ShareService {
         return await this.shareRepository.updateShare(newData);
     }
 
-    async addMemberAndSplit(shareId, userId) {
-        const share = await this.shareRepository.findShareById(shareId);
-        //Borrar este console
-        console.log("Share encontrado:", share);
-
-        if(!share){
-            throw new Error("Share no encontrado");
+    async addMember(code, userId){
+        let share = await this.findShareByCode(code);
+        if(!share) {
+            throw new Error('Share no encontrado');
         }
-
-        // Verificar si ya existe en la tabla share_member
-        const existingMember = await this.shareSplitRepository.findShareMember(shareId, userId);
-        if (existingMember) {
-            throw new Error("El usuario ya es miembro de este share");
-        }
-
-        await this.shareSplitRepository.createSplit(shareId, userId);
-        await this.shareRepository.updateShare({ id_share: shareId, members: share.members });
-        await this.shareSplitService.splitEqually(shareId);
-
-        return share;
+        await this.shareRepository.addMember(share, userId);
+        // await this.shareSplitService.createSplit(share.id_share, userId);
     }
+
+    // async addMemberAndSplit(shareId, userId) {
+    //     const share = await this.shareRepository.findShareById(shareId);
+    //     //Borrar este console
+    //     console.log("Share encontrado:", share);
+
+    //     if(!share){
+    //         throw new Error("Share no encontrado");
+    //     }
+
+    //     // Verificar si ya existe en la tabla share_member
+    //     const existingMember = await this.shareSplitRepository.findShareMember(shareId, userId);
+    //     if (existingMember) {
+    //         throw new Error("El usuario ya es miembro de este share");
+    //     }
+
+    //     await this.shareSplitRepository.createSplit(shareId, userId);
+    //     await this.shareRepository.updateShare({ id_share: shareId, members: share.members });
+    //     await this.shareSplitService.splitEqually(shareId);
+
+    //     return share;
+    // }
 }
 
 export default ShareService;

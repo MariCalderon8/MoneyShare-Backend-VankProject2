@@ -35,10 +35,10 @@ const User = sequelize.define('User', {
 });
 
 User.associate = (models) => {
-    User.belongsToMany(models.Share, { through: 'share_member', foreignKey: 'id_user' }); // Un usuario puede estar en muchos share 
-    User.hasMany(models.ExpenseSplit, { foreignKey: 'id_user' }); // Un usuario puede tener muchas divisiones de gastos
+    User.belongsToMany(models.Share, { through: 'share_member', foreignKey: 'id_user', otherKey: 'id_share', timestamps: false }); // Un usuario puede estar en muchos share 
+    User.hasMany(models.ShareSplit, { foreignKey: 'id_user' }); // Un usuario puede tener muchas divisiones de gastos
     User.hasMany(models.Expense, { foreignKey: 'id_user' }); // Un usuario puede tener muchos subgastos
-    User.hasMany(models.Share, { foreignKey: 'id_creator' }); // Un usuario puede estar en muchos shares
+    User.hasMany(models.Share, { foreignKey: 'id_creator' }); // Un usuario puede crear muchos shares
     User.hasMany(models.Notification, {foreignKey: 'id_user'}) // Un usuario tiene muchas notificaciones
 };
 
