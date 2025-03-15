@@ -24,6 +24,8 @@ router.patch('/update', verifyToken, shareValidator.updateShareValidator, shareV
 
 router.post('/members', verifyToken, shareController.addMember);
 router.patch('/percentages/:shareId', verifyToken, shareController.modifySplitsPercentages);
+router.patch('/split-equally/:shareId', verifyToken, shareController.splitPercentagesEqually);
+
 
 
 export default router;

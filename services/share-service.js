@@ -20,6 +20,7 @@ class ShareService {
         } while (!(await this.validateCode(code))); // Espera la validación correcta
         
         shareData.code = code;
+        
         return await this.shareRepository.createShare(shareData);
     }
 
@@ -56,6 +57,11 @@ class ShareService {
     async modifySplitsPercentages(shareId, percentages){
         let share = await this.findShareById(shareId);
         return await this.shareSplitService.modifyPercentage(share, percentages);
+    }
+
+    async splitPercentagesEqually(shareId) {
+        let share = await this.findShareById(shareId);
+        return await this.shareSplitService.splitEqually(share);
     }
 
     // async addMemberAndSplit(shareId, userId) {
