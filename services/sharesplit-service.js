@@ -17,8 +17,10 @@ class ShareSplitService {
     }
 
     async createSplit(idUser, share, splitEqually) {
-        //TODO: un usuario sólo puede tener un split por share
-        console.log(share.id_share);
+        let split = await this.findSplitByUserShare(share.id_share, idUser);
+        if(split) {
+            throw new Error('El usuario ya está registrado en el share');
+        }
         await this.shareSplitRepository.createSplit(idUser, share.id_share);
         if(splitEqually){
             await this.splitEqually(share);

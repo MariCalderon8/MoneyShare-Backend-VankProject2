@@ -1,0 +1,638 @@
+type: collection.insomnia.rest/5.0
+name: MoneyShare Backend
+meta:
+  id: wrk_778af02058cb438bb37a233347ad932b
+  created: 1741417469328
+  modified: 1741417469328
+collection:
+  - name: User
+    meta:
+      id: fld_84c94b2032a645adb759e0901d0c37ba
+      created: 1741417469335
+      modified: 1741421015789
+      sortKey: -1739604550875
+    children:
+      - url: http://localhost:3000/user/register
+        name: Register
+        meta:
+          id: req_45715c8c40824d04b949d63a3fab05d8
+          created: 1741417469336
+          modified: 1741792352643
+          isPrivate: false
+          sortKey: -1739604507365
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name": "Perenganito",
+            	"email": "perenganito@gmail.com",
+            	"username": "perenganito",
+            	"password": "A@12345678",
+            	"tel": "310820763499"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/10.3.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/user/login
+        name: Login
+        meta:
+          id: req_0a69ef0c19234716bb61e1ae4b593973
+          created: 1741417469338
+          modified: 1741790721648
+          isPrivate: false
+          sortKey: -1739604507265
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"email": "pepe@gmail.com",
+            	"password": "A@12345678"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/10.3.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/user/profile
+        name: Profile
+        meta:
+          id: req_35bd7e91740b47eeaf31ce6755276fa1
+          created: 1741417469341
+          modified: 1741466038414
+          isPrivate: false
+          sortKey: -1739604507165
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/10.3.0
+            id: pair_433ee358a6da4290839c793e2c3c0077
+          - id: pair_22efeef4f6c449a98b6b1014b007d7be
+            name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJqdWFuY2hvQGdtYWlsLmNvbSIsImlhdCI6MTc0MTQ2NjAxNywiZXhwIjoxNzQxNDY5NjE3fQ.jJvyu1n9_VyWFV3Mk25awRUWFuc3VEALB1BJkDJPwuQ
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Expense
+    meta:
+      id: fld_d0054fdcfd91457296ca9bffdbc42328
+      created: 1741417469345
+      modified: 1741420997398
+      sortKey: -1739604546609.5
+    children:
+      - url: http://localhost:3000/expense/createExpense
+        name: CreateExpense
+        meta:
+          id: req_3af9d282963243b2b030a148e2fe7ead
+          created: 1741417469351
+          modified: 1741649629171
+          isPrivate: false
+          sortKey: -1739604586507
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"id_share": 1,
+            	"id_user": 1,
+            	"amount": 10000,
+            	"category": "No tengo ni idea"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+            id: pair_479e2714c5f14d8a89e51b0ec3d5d37d
+          - name: User-Agent
+            value: insomnia/10.3.0
+            id: pair_67d3a9299f304ca4ba0aec8cb3edd387
+          - id: pair_85e65f16d6ee40368d25c7dcff58c580
+            name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJqdWFuY2hvQGdtYWlsLmNvbSIsImlhdCI6MTc0MTY0NzY2NCwiZXhwIjoxNzQxNjUxMjY0fQ.6gBzahY34WWQ9kzyYnaSxsLTxB47k3iKMOvtTm70Tig
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/expense/4
+        name: GetExpenseByID
+        meta:
+          id: req_86040a594ea44ad8bcd12398d21ec6dd
+          created: 1741417469353
+          modified: 1741659236382
+          isPrivate: false
+          sortKey: -1739604586457
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/10.3.0
+            id: pair_d5d475eb1dea4de39f13f9d161626595
+          - id: pair_1228acfe3d4c4fbf9fc77bcd7960405f
+            name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJqdWFuY2hvQGdtYWlsLmNvbSIsImlhdCI6MTc0MTY1ODkzOCwiZXhwIjoxNzQxNjYyNTM4fQ.Dah44jq1S_l7ONmvYzwzhMdU_m7EpPQHzB_jvuvRx-A
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/expense/updateExpense/4
+        name: UpdateExpenseByUser
+        meta:
+          id: req_c53b96b8fc5449b4b12540c5851fe000
+          created: 1741417469356
+          modified: 1741659480699
+          isPrivate: false
+          sortKey: -1739604586419.5
+        method: PATCH
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"category": "Comida Jummy"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+            id: pair_9f62b55337e842a9aab05a2bf4b62894
+          - name: User-Agent
+            value: insomnia/10.3.0
+            id: pair_d5d475eb1dea4de39f13f9d161626595
+          - id: pair_1228acfe3d4c4fbf9fc77bcd7960405f
+            name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJqdWFuY2hvQGdtYWlsLmNvbSIsImlhdCI6MTc0MTY1ODkzOCwiZXhwIjoxNzQxNjYyNTM4fQ.Dah44jq1S_l7ONmvYzwzhMdU_m7EpPQHzB_jvuvRx-A
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/expense/deleteExpense/5
+        name: DeleteExpense
+        meta:
+          id: req_90483c517b684bb78ffcd233c0b867eb
+          created: 1741417469359
+          modified: 1741417469359
+          isPrivate: false
+          sortKey: -1739604586444.5
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/10.3.0
+            id: pair_d5d475eb1dea4de39f13f9d161626595
+          - id: pair_1228acfe3d4c4fbf9fc77bcd7960405f
+            name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJjYXN0cm9tYXJpYWNhbWlsYTI0QGdtYWlsLmNvbSIsImlhdCI6MTczOTYwNTI2MiwiZXhwIjoxNzM5NjA4ODYyfQ.ELNXFgps_7iVtPtSvjZsKEOyvsa6A33pM5Qsh-a-9Uk
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Goal
+    meta:
+      id: fld_3a271b0b82f8487fb1301de073335fca
+      created: 1741417469362
+      modified: 1741420850188
+      sortKey: -1739604544476.75
+  - name: Debt
+    meta:
+      id: fld_6a83d0fc270449a793aff6ed371dde63
+      created: 1741417469364
+      modified: 1741417469364
+      sortKey: -1739604543410.375
+  - name: Notification
+    meta:
+      id: fld_a47ae079162d4ab2a015aa52094cc4ae
+      created: 1741417469365
+      modified: 1741417469365
+      sortKey: -1739604535422
+  - name: Movements
+    meta:
+      id: fld_f8eda965d89c477d834434dc4fc18d5a
+      created: 1741417469367
+      modified: 1741417469367
+      sortKey: -1739604542344
+  - name: Share
+    meta:
+      id: fld_48fce197f4994bd4a71359f48efba8ee
+      created: 1741420973416
+      modified: 1741420973416
+      sortKey: -1741420973416
+    children:
+      - url: http://localhost:3000/share/find/10
+        name: FindById
+        meta:
+          id: req_eb8e359dabde4692aa9014bc87ddcaa1
+          created: 1741420977701
+          modified: 1742342399115
+          isPrivate: false
+          sortKey: -1741420977701
+        method: GET
+        headers:
+          - name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJwZXBlQGdtYWlsLmNvbSIsImlhdCI6MTc0MjM0MDUzNSwiZXhwIjoxNzQyMzQ0MTM1fQ.OcPKmBp9sG9w5JMtSG4BiylqET4wFex1plA8XT6Bucg
+            id: pair_fb48b57298804da1acb11c43bb7b54c1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/share/create
+        name: CreateShare
+        meta:
+          id: req_4d2f934c43d9442b89aa47f231c41dbf
+          created: 1741421045953
+          modified: 1742340543765
+          isPrivate: false
+          sortKey: -1741420977676
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"id_creator": 1,
+            	"type": "share_expense",
+            	"name": "Nuevo share",
+            	"status": "active"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+            id: pair_0756a10ee5f0467eb2ffa92f4f0d6384
+          - name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJwZXBlQGdtYWlsLmNvbSIsImlhdCI6MTc0MjM0MDUzNSwiZXhwIjoxNzQyMzQ0MTM1fQ.OcPKmBp9sG9w5JMtSG4BiylqET4wFex1plA8XT6Bucg
+            id: pair_557d67666f6b44d19318709044a0bd90
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/share/update
+        name: UpdateShare
+        meta:
+          id: req_9061a77971144cd7bc981c181d237ea5
+          created: 1741422107704
+          modified: 1742342692302
+          isPrivate: false
+          sortKey: -1741420977651
+        method: PATCH
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"id_share": 10,
+            	"amount": 100000
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+            id: pair_4ae44ae546244db4a47163441a3a0370
+          - name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJwZXBlQGdtYWlsLmNvbSIsImlhdCI6MTc0MjM0MjQzMiwiZXhwIjoxNzQyMzQ2MDMyfQ._X1N-AsyLb4SyQtLUhT_yKTQ2DTB3Tc48h6p5KQgWUk
+            id: pair_f334cf8815d84925910f57e23eeab8ba
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/share/delete/1
+        name: DeleteShare
+        meta:
+          id: req_9eb1ccd0a8f64ded910302eea0b87402
+          created: 1741422388225
+          modified: 1741422488591
+          isPrivate: false
+          sortKey: -1741420977601
+        method: DELETE
+        headers:
+          - name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJqdWFuY2hvQGdtYWlsLmNvbSIsImlhdCI6MTc0MTQyMTI2NiwiZXhwIjoxNzQxNDI0ODY2fQ.k02rzWYuaKD_VNj62bKefVjV9wWW9-7tiWk765VDsvs
+            id: pair_6abfa13dd21848199bc39a71de742f27
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/share/find/code/VvkO7FV3
+        name: FindByCode
+        meta:
+          id: req_42e68746b78e428c83957368bd647c0c
+          created: 1741743635066
+          modified: 1741755314466
+          isPrivate: false
+          sortKey: -1741420977688.5
+        method: GET
+        headers:
+          - name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJwZXBlQGdtYWlsLmNvbSIsImlhdCI6MTc0MTc1NTIzNSwiZXhwIjoxNzQxNzU4ODM1fQ.q_97xjHUfsrJ_6HPlz98xSjrx2E5eOWslToGSttUrdc
+            id: pair_fb48b57298804da1acb11c43bb7b54c1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/share/members
+        name: Add Member
+        meta:
+          id: req_89b1f993e77d403895a12284030abed5
+          created: 1741755171073
+          modified: 1742343691881
+          isPrivate: false
+          sortKey: -1741420977663.5
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"code": "VvkO7FV3",
+            	"id_user": 6,
+            	"split_equally": true
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+            id: pair_0841559bb95844c19d614f77157e9675
+          - name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJwZXBlQGdtYWlsLmNvbSIsImlhdCI6MTc0MjM0MjQzMiwiZXhwIjoxNzQyMzQ2MDMyfQ._X1N-AsyLb4SyQtLUhT_yKTQ2DTB3Tc48h6p5KQgWUk
+            id: pair_eaacef8ffda74ade93a3891d44631c77
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/share/percentages/8
+        name: Modify percentages
+        meta:
+          id: req_f61c0035278d45d1b488f2bc1cf0740e
+          created: 1741793381529
+          modified: 1742071571942
+          isPrivate: false
+          sortKey: -1741420977626
+        method: PATCH
+        body:
+          mimeType: application/json
+          text: |-
+            [
+            	{
+            		"id_user": 5,
+            		"percentage": 10
+            	},
+            	{
+            		"id_user": 6,
+            		"percentage": 40
+            	},
+            	{
+            		"id_user": 1,
+            		"percentage": 35
+            	},
+            	{
+            		"id_user": 4,
+            		"percentage": 15
+            	}
+            	
+            ]
+        headers:
+          - name: Content-Type
+            value: application/json
+            id: pair_201c9d66d93b468c9256e251481a272e
+          - name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJwZXBlQGdtYWlsLmNvbSIsImlhdCI6MTc0MjA3MTMzNiwiZXhwIjoxNzQyMDc0OTM2fQ.VRiEIjGLTFzIAdOdw8aaFcuIMpse4aYyoPiyUtUVFpk
+            id: pair_0fa76d455590416780b3a2086da18091
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/share/split-equally/8
+        name: Split Equally
+        meta:
+          id: req_6621a914a3ba4dd3966519da36aeebfa
+          created: 1742071274622
+          modified: 1742071354185
+          isPrivate: false
+          sortKey: -1741420977613.5
+        method: PATCH
+        headers:
+          - name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJwZXBlQGdtYWlsLmNvbSIsImlhdCI6MTc0MjA3MTMzNiwiZXhwIjoxNzQyMDc0OTM2fQ.VRiEIjGLTFzIAdOdw8aaFcuIMpse4aYyoPiyUtUVFpk
+            id: pair_7c24b59bb98045888558c4eb5c03f5d7
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/share/members
+        name: Delete Member
+        meta:
+          id: req_b63d15b9a1304dda8b7f1ee5468a107a
+          created: 1742341508374
+          modified: 1742343654438
+          isPrivate: false
+          sortKey: -1741420977657.25
+        method: DELETE
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"id_share": 8,
+            	"id_user": 1
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+            id: pair_0841559bb95844c19d614f77157e9675
+          - name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJwZXBlQGdtYWlsLmNvbSIsImlhdCI6MTc0MjM0MDUzNSwiZXhwIjoxNzQyMzQ0MTM1fQ.OcPKmBp9sG9w5JMtSG4BiylqET4wFex1plA8XT6Bucg
+            id: pair_eaacef8ffda74ade93a3891d44631c77
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: ShareSplit
+    meta:
+      id: fld_1250d48e92094947b4fb4f79967ea126
+      created: 1741667334405
+      modified: 1741793375612
+      sortKey: -1739604548742.25
+    children:
+      - url: http://localhost:3000/share-split/7
+        name: Find by Id
+        meta:
+          id: req_b579bf1337c1440094017f7a11c20a2d
+          created: 1741669084619
+          modified: 1741799482232
+          isPrivate: false
+          sortKey: -1741669084619
+        method: GET
+        headers:
+          - name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJwZXBlQGdtYWlsLmNvbSIsImlhdCI6MTc0MTc5ODI3OSwiZXhwIjoxNzQxODAxODc5fQ.i4SONaNbEJAKMJK0L10cZYWsl25a5ElYRTYJ90LoOr0
+            id: pair_42124fa6c689466fa3b06c50f1a966e3
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/share-split/share/8
+        name: Find by Share
+        meta:
+          id: req_b494b4dc1ee043e1a52fae53957b5241
+          created: 1741669207432
+          modified: 1742071367107
+          isPrivate: false
+          sortKey: -1741668225455.5
+        method: GET
+        headers:
+          - name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJwZXBlQGdtYWlsLmNvbSIsImlhdCI6MTc0MjA3MTMzNiwiZXhwIjoxNzQyMDc0OTM2fQ.VRiEIjGLTFzIAdOdw8aaFcuIMpse4aYyoPiyUtUVFpk
+            id: pair_42124fa6c689466fa3b06c50f1a966e3
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/share-split/share/8/user/1
+        name: Find by User and Share
+        meta:
+          id: req_56dace35853247a19ae7aa1bc92eb410
+          created: 1741669459812
+          modified: 1741798759888
+          isPrivate: false
+          sortKey: -1741668655037.25
+        method: GET
+        headers:
+          - name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJwZXBlQGdtYWlsLmNvbSIsImlhdCI6MTc0MTc5ODI3OSwiZXhwIjoxNzQxODAxODc5fQ.i4SONaNbEJAKMJK0L10cZYWsl25a5ElYRTYJ90LoOr0
+            id: pair_42124fa6c689466fa3b06c50f1a966e3
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/share-split/7
+        name: Delete split
+        meta:
+          id: req_6af792aa52d147bf8361272c886d2ab7
+          created: 1741670746657
+          modified: 1741670987474
+          isPrivate: false
+          sortKey: -1741670746657
+        method: DELETE
+        headers:
+          - name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJwZXBlQGdtYWlsLmNvbSIsImlhdCI6MTc0MTY3MDk3OSwiZXhwIjoxNzQxNjc0NTc5fQ.Ye8CFHgS2R1C27cGxn9gALdI_JZkwr2OwvT-MICB_cA
+            id: pair_03455db33f7442b49e14f0d1b44c6a4a
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_3d84ad5211164241b7e8da81247caf1f
+    created: 1741417469332
+    modified: 1741417469332
+environments:
+  name: Base Environment
+  meta:
+    id: env_3efbd9accb8742e7980f583f1134b32e
+    created: 1741417469330
+    modified: 1741417469330
+    isPrivate: false

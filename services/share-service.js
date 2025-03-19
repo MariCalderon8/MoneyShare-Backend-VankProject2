@@ -60,6 +60,10 @@ class ShareService {
     }
 
     async removeMember(shareId, userId) {
+        let share = await this.findShareById(shareId);
+        if(share.id_creator == userId) {
+            throw new Error('No se puede eliminar al creador del share');
+        }
         let split = await this.findSplitByShareUser(shareId, userId);
         let removeMember = this.shareSplitService.deleteSplit(split);
         this.splitPercentagesEqually(shareId);
