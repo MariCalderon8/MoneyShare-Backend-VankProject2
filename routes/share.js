@@ -23,6 +23,7 @@ router.delete('/delete/:id', verifyToken, shareController.deleteShare);
 router.patch('/update', verifyToken, shareValidator.updateShareValidator, shareValidator.validatorShare, shareController.updateShare);
 
 router.post('/members', verifyToken, shareController.addMember);
+router.delete('/members', verifyToken, shareController.removeMember);
 router.patch('/percentages/:shareId', verifyToken, shareController.modifySplitsPercentages);
 router.patch('/split-equally/:shareId', verifyToken, shareController.splitPercentagesEqually);
 

@@ -60,6 +60,16 @@ class ShareController {
         }
     }
 
+    removeMember = async (req, res) => {
+        try{
+            const removeMember = await this.shareService.removeMember(req.body.id_share, req.body.id_user);
+            return res.status(200).json({ data: removeMember });
+        } catch (error) {
+            console.error(error);
+            return res.status(400).json({ message: error.message });
+        }
+    }
+
     modifySplitsPercentages = async (req, res) => {
         try {
             const modifyPercentages = await this.shareService.modifySplitsPercentages(req.params.shareId, req.body);

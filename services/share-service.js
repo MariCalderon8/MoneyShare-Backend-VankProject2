@@ -21,7 +21,8 @@ class ShareService {
         
         shareData.code = code;
         
-        return await this.shareRepository.createShare(shareData);
+        let createShare = await this.shareRepository.createShare(shareData);
+        await this.addMember(code, shareData.id_creator, true);
     }
 
     async createCode() {
@@ -54,6 +55,16 @@ class ShareService {
         await this.shareSplitService.createSplit(userId, share, splitEqually);
     }
 
+    async findSplitByShareUser(shareId, userId) {
+        return await this.shareSplitService.findSplitByUserShare(shareId, userId);
+    }
+
+    async removeMember(shareId, userId) {
+        let split = await this.findSplitByShareUser(shareId, userId);
+        let removeMember = this.shareSplitService.deleteSplit(split);
+        this.splitPercentagesEqually(shareId);
+    }
+
     async modifySplitsPercentages(shareId, percentages){
         let share = await this.findShareById(shareId);
         return await this.shareSplitService.modifyPercentage(share, percentages);
@@ -64,27 +75,6 @@ class ShareService {
         return await this.shareSplitService.splitEqually(share);
     }
 
-    // async addMemberAndSplit(shareId, userId) {
-    //     const share = await this.shareRepository.findShareById(shareId);
-    //     //Borrar este console
-    //     console.log("Share encontrado:", share);
-
-    //     if(!share){
-    //         throw new Error("Share no encontrado");
-    //     }
-
-    //     // Verificar si ya existe en la tabla share_member
-    //     const existingMember = await this.shareSplitRepository.findShareMember(shareId, userId);
-    //     if (existingMember) {
-    //         throw new Error("El usuario ya es miembro de este share");
-    //     }
-
-    //     await this.shareSplitRepository.createSplit(shareId, userId);
-    //     await this.shareRepository.updateShare({ id_share: shareId, members: share.members });
-    //     await this.shareSplitService.splitEqually(shareId);
-
-    //     return share;
-    // }
 }
 
 export default ShareService;

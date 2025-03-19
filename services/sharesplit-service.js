@@ -17,7 +17,7 @@ class ShareSplitService {
     }
 
     async createSplit(idUser, share, splitEqually) {
-        //TODO: split equally ???, un usuario sólo puede tener un split por share
+        //TODO: un usuario sólo puede tener un split por share
         console.log(share.id_share);
         await this.shareSplitRepository.createSplit(idUser, share.id_share);
         if(splitEqually){
@@ -25,9 +25,8 @@ class ShareSplitService {
         }
     }
 
-    async deleteSplit(splitId) {
-        return await this.shareSplitRepository.deleteSplit(splitId);
-        //TODO: Split equally call
+    async deleteSplit(split) {
+        return await this.shareSplitRepository.deleteSplit(split.id_split);
     }
 
     async updateSplit(splitData, userId, shareId) {
@@ -86,6 +85,7 @@ class ShareSplitService {
                 assigned_amount: assignedAmount,
                 balance: balance
             }
+            console.log(splitData);
             await this.updateSplit(splitData, split.id_user, share.id_share)
         }
     }
