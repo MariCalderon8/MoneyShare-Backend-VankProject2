@@ -7,13 +7,20 @@ import ShareController from '../controllers/share-controller.js';
 import shareValidator from '../middleware/shareValidator.js';
 import ShareSplitService from '../services/sharesplit-service.js';
 import ShareSplitRepository from '../repositories/sharesplit-repository.js';
+import UserRepository from '../repositories/user-repository.js';
+import UserService from '../services/user-service.js';
 
 
 const router = express.Router();
+
+const userRepository = new UserRepository();
+const userService = new UserService(userRepository);
+
 const shareSplitRepository = new ShareSplitRepository();
 const shareSplitService = new ShareSplitService(shareSplitRepository);
+
 const shareRepository = new ShareRepository();
-const shareService = new ShareService(shareRepository, shareSplitService);
+const shareService = new ShareService(shareRepository, shareSplitService, userService);
 const shareController = new ShareController(shareService);
 
 router.get('/find/:id', verifyToken, shareController.findShareById)

@@ -1,8 +1,9 @@
 class ShareService {
 
-    constructor(shareRepository, shareSplitService) {
+    constructor(shareRepository, shareSplitService, userService) {
         this.shareRepository = shareRepository;
         this.shareSplitService = shareSplitService;
+        this.userService = userService;
     }
 
     async findShareById(id) {
@@ -13,7 +14,9 @@ class ShareService {
         return await this.shareRepository.findShareByCode(code);
     }
 
-    async createShare(shareData) {
+    async createShare(shareData, userEmail) {
+        shareData.id_creator = await this.userService.getIdByEmail(userEmail);
+
         let code;
         do {
             code = await this.createCode();
@@ -23,6 +26,8 @@ class ShareService {
         
         let createShare = await this.shareRepository.createShare(shareData);
         await this.addMember(code, shareData.id_creator, true);
+
+        return createShare;
     }
 
     async createCode() {

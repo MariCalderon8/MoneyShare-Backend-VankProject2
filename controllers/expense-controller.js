@@ -27,7 +27,7 @@ class ExpenseController {
 
     createExpense = async (req, res) => {
         try {
-            const expense = await this.expenseService.createExpense(req.body);
+            const expense = await this.expenseService.createExpense(req.body, req.dataToken.userEmail);
             return res.status(201).json(expense);
         } catch (error) {
             return res.status(400).json({ message: error.message });

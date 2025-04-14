@@ -1,6 +1,7 @@
 class ExpenseService {
 
-    constructor(expenseRepository) {
+    constructor(expenseRepository, userService) {
+        this.userService = userService;
         this.expenseRepository = expenseRepository;
     }
 
@@ -12,8 +13,9 @@ class ExpenseService {
         return await this.expenseRepository.findExpenseByID(expenseID);
     }
 
-    async createExpense(createExpenseDTO) {
-        return await this.expenseRepository.createExpense(createExpenseDTO);
+    async createExpense(expenseDTO, userEmail) {
+        expenseDTO.id_user = await this.userService.getIdByEmail(userEmail);
+        return await this.expenseRepository.createExpense(expenseDTO);
     }
 
     async updateExpense(updateExpenseDTO, expenseID) {

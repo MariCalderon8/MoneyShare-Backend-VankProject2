@@ -9,6 +9,17 @@ class UserRepository {
     this.collectionName = 'free_ai';
   }
 
+  async getIdByEmail(email){
+    const user = await User.findOne({
+      where: { email: email }
+    });
+    
+    if (user) {
+      return user.id_user;
+    }
+    throw new Error("Email no válido");
+  }
+
   async register(info) {
     const hashedPassword = await bcrypt.hash(info.password, 10);
     let user = await User.create({

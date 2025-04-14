@@ -12,6 +12,10 @@ class UserService {
     return await this.userRepository.login(info);
   }
 
+  async getIdByEmail(email) {
+    return await this.userRepository.getIdByEmail(email);
+  }
+  
 }
 
 export default UserService;
