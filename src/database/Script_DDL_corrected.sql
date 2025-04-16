@@ -28,12 +28,6 @@ CREATE TABLE "share" (
     due_date TIMESTAMP  
 );
 
--- Relationship between users and shares
-CREATE TABLE "share_member" (
-    id_share_member SERIAL PRIMARY KEY,
-   	id_user INT REFERENCES "user"(id_user) ON DELETE CASCADE,
-    id_share INT REFERENCES "share"(id_share) ON DELETE CASCADE
-);
 
 --Expenses table
 CREATE TABLE "expense" (
@@ -55,6 +49,28 @@ CREATE TABLE "share_split" (
     paid DECIMAL(10,2) DEFAULT 0 NOT NULL,
     balance DECIMAL(10,2) DEFAULT 0 NOT NULL 
 );
+
+CREATE TYPE notification_type AS ENUM('payment', 'debt', 'goal', 'general');
+--Notifications table
+CREATE TABLE "notification" (
+    id_notification SERIAL PRIMARY KEY,
+    id_user INT REFERENCES "user"(id_user) ON DELETE CASCADE,
+    message TEXT NOT NULL,
+    type notification_type NOT NULL,
+    date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE VIEW view_share_members AS
+SELECT 
+    ss.id_share,
+    u.id_user,
+    u.email AS email_user,
+    u.username,
+    ss.percentage,
+    ss.assigned_amount AS amount_to_pay
+FROM share_split ss
+JOIN "user" u ON ss.id_user = u.id_user;
+
 /*
 -- Debts and Loans table
 CREATE TABLE  "debt" (
@@ -90,22 +106,7 @@ CREATE TABLE "goal_contribution" (
     date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );*/
 
-CREATE TYPE notification_type AS ENUM('payment', 'debt', 'goal', 'general');
---Notifications table
-CREATE TABLE "notification" (
-    id_notification SERIAL PRIMARY KEY,
-    id_user INT REFERENCES "user"(id_user) ON DELETE CASCADE,
-    message TEXT NOT NULL,
-    type notification_type NOT NULL,
-    date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
 
---Members of each Share
-CREATE VIEW view_share_members AS
-SELECT u.id_user AS id_user, s.id_share AS id_share, u.name AS user_name, u.email AS user_email, s.name AS share_name
-FROM "share_member" sm
-JOIN "user" u ON sm.id_user = u.id_user
-JOIN "share" s ON sm.id_share = s.id_share;
 
 /*
 --Expense summary per share
