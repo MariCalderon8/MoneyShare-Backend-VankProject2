@@ -29,6 +29,10 @@ const ShareMember = sequelize.define('ShareMember', {
     balance: {
         type: DataTypes.FLOAT,
         allowNull: true,
+    },
+    paid: {
+        type: DataTypes.FLOAT,
+        allowNull: true,
     }
 }, {
     tableName: 'view_share_members',

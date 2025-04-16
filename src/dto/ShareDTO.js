@@ -33,7 +33,7 @@ const Share = sequelize.define('Share', {
         type: DataTypes.DECIMAL(10,2), 
         defaultValue: 0 
     },
-    paid_amount: { //Este aplica sólo para goals y debts
+    paid_amount: {
         type: DataTypes.DECIMAL(10,2), 
         defaultValue: 0
     },
@@ -47,6 +47,11 @@ const Share = sequelize.define('Share', {
     },
     due_date: { 
         type: DataTypes.DATE 
+    },
+    split_equally:{
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: true
     }
 }, {
     tableName: 'share',
