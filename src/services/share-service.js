@@ -1,9 +1,10 @@
 class ShareService {
 
-    constructor(shareRepository, shareSplitService, userService) {
+    constructor(shareRepository, shareSplitService, userService, shareMemberService) {
         this.shareRepository = shareRepository;
         this.shareSplitService = shareSplitService;
         this.userService = userService;
+        this.shareMemberService = shareMemberService;
     }
 
     async findShareById(id) {
@@ -82,6 +83,18 @@ class ShareService {
     async splitPercentagesEqually(shareId) {
         let share = await this.findShareById(shareId);
         return await this.shareSplitService.splitEqually(share);
+    }
+
+    async findMembersByShare(idShare) {
+        return await this.shareMemberService.findMembersByShare(idShare);
+    }
+
+    async findMembersWithDebt(idShare) {
+        return await this.shareMemberService.findMembersWithDebt(idShare);
+    }
+
+    async findMembersWithOverload(idShare) {
+        return await this.shareMemberService.findMembersWithOverload(idShare);
     }
 
 }

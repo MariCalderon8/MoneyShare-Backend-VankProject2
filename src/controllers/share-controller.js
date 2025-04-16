@@ -90,6 +90,35 @@ class ShareController {
         }
     }
 
+    findMembersByShare = async (req, res) => {
+        try {
+            const members = await this.shareService.findMembersByShare(req.params.idShare);
+            return res.status(200).json({ data: members });
+        } catch (error) {
+            console.error(error);
+            return res.status(400).json({ message: error.message });
+        }
+    }
+
+    findMembersWithDebt = async (req, res) => {
+        try {
+            const members = await this.shareService.findMembersWithDebt(req.params.idShare);
+            return res.status(200).json({ data: members });
+        } catch (error) {
+            console.error(error);
+            return res.status(400).json({ message: error.message });
+        }
+    }
+
+    findMembersWithOverload = async (req, res) => {
+        try {
+            const members = await this.shareService.findMembersWithOverload(req.params.idShare);
+            return res.status(200).json({ data: members });
+        } catch (error) {
+            console.error(error);
+            return res.status(400).json({ message: error.message });
+        }
+    }
 }
 
 export default ShareController;

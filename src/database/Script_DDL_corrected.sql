@@ -25,7 +25,7 @@ CREATE TABLE "share" (
     paid_amount DECIMAL(10,2) DEFAULT 0,
     status share_status DEFAULT 'active',
     start_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    due_date TIMESTAMP  
+    due_date TIMESTAMP
 );
 
 
@@ -35,8 +35,9 @@ CREATE TABLE "expense" (
     id_share INT REFERENCES "share"(id_share) ON DELETE CASCADE,
    	id_user INT REFERENCES "user"(id_user) ON DELETE CASCADE,
     amount DECIMAL(10,2) NOT NULL,
-    category VARCHAR(50), --Más adelante puede ser un ENUM
-    date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    category VARCHAR(50),
+    date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    description TEXT NOT NULL
 );
 
 --Expense distribution table
@@ -67,7 +68,8 @@ SELECT
     u.email AS email_user,
     u.username,
     ss.percentage,
-    ss.assigned_amount AS amount_to_pay
+    ss.assigned_amount AS amount_to_pay,
+    ss.balance
 FROM share_split ss
 JOIN "user" u ON ss.id_user = u.id_user;
 

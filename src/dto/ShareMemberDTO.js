@@ -25,11 +25,18 @@ const ShareMember = sequelize.define('ShareMember', {
     amount_to_pay: {
         type: DataTypes.FLOAT,
         allowNull: true,
+    },
+    balance: {
+        type: DataTypes.FLOAT,
+        allowNull: true,
     }
 }, {
     tableName: 'view_share_members',
-    timestamps: false, 
-    freezeTableName: true 
+    timestamps: false,
+    freezeTableName: true,
+    primaryKey: false
 });
+
+ShareMember.removeAttribute('id');
 
 export default ShareMember;
