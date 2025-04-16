@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import User from '../dto/UserDTO.js';
+import { where } from 'sequelize';
 dotenv.config();
 
 class UserRepository {
@@ -9,15 +10,43 @@ class UserRepository {
     this.collectionName = 'free_ai';
   }
 
-  async getIdByEmail(email){
+  async getIdByEmail(email) {
     const user = await User.findOne({
       where: { email: email }
     });
-    
-    if (user) {
+
+    if(user) {
       return user.id_user;
     }
-    throw new Error("Email no válido");
+    return null;
+  }
+
+  async findAllUsers() {
+    return await User.findAll();
+  }
+
+  async findUserById(id) {
+    let user = await User.findByPk(id);
+    if (!user) {
+      throw new Error("Usuario no encontrado");
+    }
+
+    return user;
+  }
+
+  async delete(id) {
+    const deleted = await User.destroy({ where: { id_user: id } });
+    if (!deleted) {
+      throw new Error('Error al eliminar usuario');
+    }
+    return deleted;
+  }
+
+  async updateUser(userId, data) {
+    return await User.update(data, {
+      where: { id_user: userId },
+      returning: true
+    })
   }
 
   async register(info) {
