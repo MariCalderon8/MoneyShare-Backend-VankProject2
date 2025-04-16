@@ -14,7 +14,12 @@ class ExpenseService {
     }
 
     async createExpense(expenseDTO, userEmail) {
-        expenseDTO.id_user = await this.userService.getIdByEmail(userEmail);
+        const userId = await this.userService.getIdByEmail(userEmail);
+        console.log(userId);
+        if (!userId) {
+            throw new Error("Usuario no encontrado");
+        }
+        expenseDTO.id_user = userId;
         return await this.expenseRepository.createExpense(expenseDTO);
     }
 

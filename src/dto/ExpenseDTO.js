@@ -29,6 +29,9 @@ const Expense = sequelize.define('Expense', {
     date: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW
+    },
+    description: { 
+        type: DataTypes.TEXT 
     }
 }, {
     tableName: 'expense',

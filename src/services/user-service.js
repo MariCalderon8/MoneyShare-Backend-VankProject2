@@ -17,11 +17,8 @@ class UserService {
   }
 
   async getIdByEmail(email) {
-    const user = await this.userRepository.getIdByEmail(email);
-    if (user) {
-      return user.id_user;
-    }
-    throw new Error("Email no válido");
+    return await this.userRepository.getIdByEmail(email);
+
   }
 
   async findAllUsers() {

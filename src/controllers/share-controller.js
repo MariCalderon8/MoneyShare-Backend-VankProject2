@@ -23,12 +23,12 @@ class ShareController {
     };
 
     createShare = async (req, res) => {
-        // try {
+        try {
             const data = await this.shareService.createShare(req.body, req.dataToken.userEmail);
             return res.status(201).json({ message: 'Share creado exitosamente', data });
-        // } catch (error) {
-        //     return res.status(400).json({ message: 'Error al crear Share', error: error.message });
-        // }
+        } catch (error) {
+            return res.status(400).json({ message: 'Error al crear Share', error: error.message });
+        }
     };
 
 

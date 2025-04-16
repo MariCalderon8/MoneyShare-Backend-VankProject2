@@ -10,7 +10,7 @@ class ExpenseController {
             if (!expense) {
                 return res.status(404).json({ message: "Gasto no encontrado" });
             }
-            return res.status(200).json(expense);
+            return res.status(200).json({data: expense});
         } catch (error) {
             return res.status(500).json({ message: error.message });
         }
@@ -19,7 +19,7 @@ class ExpenseController {
     findExpenseByUser = async (req, res) => {
         try {
             const expenses = await this.expenseService.getExpenseByUser(req.params.username);
-            return res.status(200).json(expenses);
+            return res.status(200).json({data: expenses});
         } catch (error) {
             return res.status(500).json({ message: error.message });
         }
@@ -28,15 +28,16 @@ class ExpenseController {
     createExpense = async (req, res) => {
         try {
             const expense = await this.expenseService.createExpense(req.body, req.dataToken.userEmail);
-            return res.status(201).json(expense);
+            return res.status(201).json({data: expense});
         } catch (error) {
+            console.error(error);
             return res.status(400).json({ message: error.message });
         }
     };
     updateExpense = async (req, res) => {
         try {
             const updatedExpense = await this.expenseService.updateExpense(req.body, req.params.id);
-            return res.status(200).json(updatedExpense);
+            return res.status(200).json({data: updatedExpense});
         } catch (error) {
             console.error(error);
             return res.status(400).json({ message: error.message });
