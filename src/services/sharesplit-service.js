@@ -27,8 +27,8 @@ class ShareSplitService {
         }
     }
 
-    async deleteSplit(split) {
-        return await this.shareSplitRepository.deleteSplit(split.id_split);
+    async deleteSplit(splitId) {
+        return await this.shareSplitRepository.deleteSplit(splitId);
     }
 
     async updateSplit(splitData, userId, shareId) {

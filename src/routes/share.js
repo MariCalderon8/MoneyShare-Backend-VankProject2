@@ -44,4 +44,6 @@ router.get('/members/all/:idShare', verifyToken, shareController.findMembersBySh
 router.get('/members/debts/:idShare', verifyToken, shareController.findMembersWithDebt);
 router.get('/members/overloads/:idShare', verifyToken, shareController.findMembersWithOverload);
 
+router.patch('/payment', verifyToken, shareController.makePayment);
+
 export default router;

@@ -22,9 +22,9 @@ class ShareService {
         do {
             code = await this.createCode();
         } while (!(await this.validateCode(code))); // Espera la validación correcta
-        
+
         shareData.code = code;
-        
+
         let createShare = await this.shareRepository.createShare(shareData);
         await this.addMember(code, shareData.id_creator, true);
 
@@ -53,9 +53,9 @@ class ShareService {
         return await this.shareRepository.updateShare(newData);
     }
 
-    async addMember(code, userId, splitEqually){
+    async addMember(code, userId, splitEqually) {
         let share = await this.findShareByCode(code);
-        if(!share) {
+        if (!share) {
             throw new Error('Share no encontrado');
         }
         await this.shareSplitService.createSplit(userId, share, splitEqually);
@@ -67,7 +67,7 @@ class ShareService {
 
     async removeMember(shareId, userId) {
         let share = await this.findShareById(shareId);
-        if(share.id_creator == userId) {
+        if (share.id_creator == userId) {
             throw new Error('No se puede eliminar al creador del share');
         }
         let split = await this.findSplitByShareUser(shareId, userId);
@@ -75,7 +75,7 @@ class ShareService {
         this.splitPercentagesEqually(shareId);
     }
 
-    async modifySplitsPercentages(shareId, percentages){
+    async modifySplitsPercentages(shareId, percentages) {
         let share = await this.findShareById(shareId);
         return await this.shareSplitService.modifyPercentage(share, percentages);
     }
@@ -98,19 +98,19 @@ class ShareService {
 
         await this.shareSplitService.updateSplitsAfterExpense(updatedShare, userId, amount);
     }
-    
+
     async updateShareAfterExpenseChange(shareId, userId, amountDifference) {
         const share = await this.findShareById(shareId);
         if (!share) {
             throw new Error("Share no encontrado");
         }
-        
+
         const newPaidAmount = parseFloat(share.paid_amount) + parseFloat(amountDifference);
         const updatedShare = await this.updateShare({
             id_share: shareId,
             paid_amount: newPaidAmount
         });
-        
+
         await this.shareSplitService.updateSplitsAfterExpense(updatedShare, userId, amountDifference);
     }
 
@@ -124,6 +124,62 @@ class ShareService {
 
     async findMembersWithOverload(idShare) {
         return await this.shareMemberService.findMembersWithOverload(idShare);
+    }
+
+    // Aplica sólo para expenses (gastos) y debts (deudas)
+    async makePayment(idShare, amountToPay, payingUserEmail, paidUserId) {
+        await this.validateShareBeforePayment(idShare);
+        await this.validateUsersBeforePayment(idShare, payingUserEmail, paidUserId);
+        const payingUserId = await this.userService.getIdByEmail(payingUserEmail);
+
+        const splitPayingUser = await this.findSplitByShareUser(idShare, payingUserId);
+        const splitPaidUser = await this.findSplitByShareUser(idShare, paidUserId);
+        console.log(amountToPay);
+        console.log(splitPayingUser.paid);
+        console.log(splitPayingUser.assigned_amount);
+        if (parseFloat(amountToPay) + parseFloat(splitPayingUser.paid) > parseFloat(splitPayingUser.assigned_amount) || amountToPay > splitPaidUser.balance) {
+            throw new Error(`El monto excede el total a pagar`);
+        }
+
+        await this.shareSplitService.updateSplit({
+            paid: parseFloat(amountToPay) + parseFloat(splitPayingUser.paid),
+            balance: parseFloat(amountToPay) + parseFloat(splitPayingUser.balance)
+        }, payingUserId, idShare);
+
+        await this.shareSplitService.updateSplit({
+            paid: parseFloat(splitPaidUser.paid) - parseFloat(amountToPay),
+            balance: parseFloat(splitPaidUser.balance) - parseFloat(amountToPay)
+        }, paidUserId, idShare);
+
+    }
+
+    async validateShareBeforePayment(idShare) {
+        const share = await this.findShareById(idShare);
+        if (!share) {
+            throw new Error("Share no encontrado")
+        }
+        if (share.type != "share_expense" && share.type != "share_debt") {
+            throw new Error("Share no válido")
+        }
+    }
+
+    async validateUsersBeforePayment(shareId, payingUserEmail, paidUserId) {
+        const payingUserId = await this.userService.getIdByEmail(payingUserEmail);
+        const payingUser = await this.userService.findById(payingUserId);
+        const paidUser = await this.userService.findById(paidUserId);
+        if (!payingUser || !paidUser) {
+            throw new Error("Uno de los usuarios no es válido");
+        }
+
+        const splitPayingUser = await this.findSplitByShareUser(shareId, payingUserId);
+        const splitPaidUser = await this.findSplitByShareUser(shareId, paidUserId);
+        if (!splitPayingUser || !splitPaidUser) {
+            throw new Error("El usuario no pertenece al share");
+        }
+
+        if(splitPaidUser.balance <= 0) {
+            throw new Error("No se le puede pagar a usuarios con balance neutro o negativo")
+        }
     }
 
 }

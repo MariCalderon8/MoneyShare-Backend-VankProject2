@@ -119,6 +119,16 @@ class ShareController {
             return res.status(400).json({ message: error.message });
         }
     }
+
+    makePayment = async (req, res) => {
+        try {
+            await this.shareService.makePayment(req.body.id_share, req.body.amount_to_pay, req.dataToken.userEmail, req.body.paid_user_id);
+            return res.status(200).json({message: "Pago realizado con éxito"});
+        } catch(error) {
+            console.error(error);
+            return res.status(500).json({ message: error.message });
+        }
+    }
 }
 
 export default ShareController;
