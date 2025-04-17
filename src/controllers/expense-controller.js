@@ -25,6 +25,24 @@ class ExpenseController {
         }
     };
 
+    findExpensesByShare = async (req, res) => {
+        try {
+            const expenses = await this.expenseService.findExpensesByShare(req.params.shareId);
+            return res.status(200).json({data: expenses});
+        } catch (error) {
+            return res.status(500).json({message: error.message});
+        }
+    }
+
+    findExpensesByShareUser = async (req, res) => {
+        try {
+            const expenses = await this.expenseService.findExpensesByShareUser(req.params.shareId, req.params.userId);
+            return res.status(200).json({data: expenses});
+        } catch (error) {
+            return res.status(500).json({message: error.message});
+        }
+    }
+
     createExpense = async (req, res) => {
         try {
             const expense = await this.expenseService.createExpense(req.body, req.dataToken.userEmail);

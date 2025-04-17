@@ -14,6 +14,28 @@ class ExpenseService {
         return await this.expenseRepository.findExpenseByID(expenseID);
     }
 
+    async findExpensesByShare(shareId){
+        const share = await this.shareService.findShareById(shareId);
+        if(!share) {
+            throw new Error("Share no encontrado")
+        }
+
+        return await this.expenseRepository.findExpensesByShare(shareId);
+    }
+
+    async findExpensesByShareUser(shareId, userId) {
+        const share = await this.shareService.findShareById(shareId);
+        if(!share) {
+            throw new Error("Share no encontrado")
+        }
+        const user = await this.userService.findById(userId);
+        if(!user) {
+            throw new Error("Usuario no encontrado")
+        }
+
+        return await this.expenseRepository.findExpensesByShareUser(shareId, userId);
+    }
+
     async createExpense(expenseDTO, userEmail) {
         const userId = await this.userService.getIdByEmail(userEmail);
         if (!userId) {

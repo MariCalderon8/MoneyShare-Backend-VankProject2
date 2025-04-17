@@ -90,13 +90,12 @@ class ShareService {
         if (!share) {
             throw new Error("Share no encontrado");
         }
-        console.log('Gasto nuevo');
         const newPaidAmount = parseFloat(share.paid_amount) + parseFloat(amount);
         const updatedShare = await this.updateShare({
             id_share: shareId,
             paid_amount: newPaidAmount
         });
-        console.log(`Nuevo gasto modificado en share ${newPaidAmount}`);
+
         await this.shareSplitService.updateSplitsAfterExpense(updatedShare, userId, amount);
     }
     

@@ -6,6 +6,21 @@ class ExpenseRepository {
     return await Expense.findOne({ where: { id_expense: expenseID } });
   }
 
+  async findExpensesByShare(shareId) {
+    return await Expense.findAll({
+      where: {id_share: shareId}
+    });
+  }
+
+  async findExpensesByShareUser(shareId, userId) {
+    return await Expense.findAll({
+      where: {
+        id_share: shareId,
+        id_user: userId
+      }
+    })
+  }
+
   async createExpense(info) {
     const expense = await Expense.create(info);
     if (!expense) {
@@ -13,14 +28,6 @@ class ExpenseRepository {
     }
     return expense;
   }
-
-  // async updateExpense(info, expenseID) {
-  //   const expense = await Expense.update(info, { where: { id: expenseID } });
-  //   if (!expense) {
-  //     throw new Error('Error al modificar gasto');
-  //   }
-  //   return expense;
-  // }
 
   async updateExpense(expenseData, expenseID) {
     const [updatedRows] = await Expense.update(expenseData, {

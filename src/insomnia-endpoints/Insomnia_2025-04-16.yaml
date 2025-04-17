@@ -49,7 +49,7 @@ collection:
         meta:
           id: req_0a69ef0c19234716bb61e1ae4b593973
           created: 1741417469338
-          modified: 1744781818250
+          modified: 1744847077177
           isPrivate: false
           sortKey: -1739604507265
         method: POST
@@ -57,7 +57,7 @@ collection:
           mimeType: application/json
           text: |-
             {
-            	"email": "juan.perez@email.com",
+            	"email": "laura.diaz@email.com",
             	"password": "A@12345678"
             }
         headers:
@@ -78,7 +78,7 @@ collection:
         meta:
           id: req_35bd7e91740b47eeaf31ce6755276fa1
           created: 1741417469341
-          modified: 1742598225215
+          modified: 1744843973670
           isPrivate: false
           sortKey: -1739604507165
         method: GET
@@ -89,7 +89,7 @@ collection:
           - id: pair_22efeef4f6c449a98b6b1014b007d7be
             name: Authorization
             value: Bearer
-              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJwZXBlQGdtYWlsLmNvbSIsImlhdCI6MTc0MjU5ODE4OCwiZXhwIjoxNzQyNjAxNzg4fQ.O438HuN2P0elaOzN9Ywvr1OCi-G8wfwJpzJTe56ZnkI
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJqdWFuLnBlcmV6QGVtYWlsLmNvbSIsImlhdCI6MTc0NDg0MzEzMCwiZXhwIjoxNzQ0ODQ2NzMwfQ.fcLMrA6NpMot2ghUvBSUa2rRGn6f1C6hKtc7u_gA6oY
             disabled: false
         settings:
           renderRequestBody: true
@@ -104,7 +104,7 @@ collection:
         meta:
           id: req_e1d1505a3ff940b89851dcbce59d5441
           created: 1744761534140
-          modified: 1744774475906
+          modified: 1744843187857
           isPrivate: false
           sortKey: -1744761534140
         method: GET
@@ -115,7 +115,7 @@ collection:
           - id: pair_23ec4cdfe1054f3dbe5ea2ce941120a4
             name: Authorization
             value: Bearer
-              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJtY2cyMDA1NTdAZ21haWwuY29tIiwiaWF0IjoxNzQ0Nzc0NDExLCJleHAiOjE3NDQ3NzgwMTF9.Qnw_wzDdxDwODeXliiu_X9p_-BTMmMa4GWSYqg4d5Kc
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJqdWFuLnBlcmV6QGVtYWlsLmNvbSIsImlhdCI6MTc0NDg0MzEzMCwiZXhwIjoxNzQ0ODQ2NzMwfQ.fcLMrA6NpMot2ghUvBSUa2rRGn6f1C6hKtc7u_gA6oY
             disabled: false
         settings:
           renderRequestBody: true
@@ -125,12 +125,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: http://localhost:3000/user/11
+      - url: http://localhost:3000/user/10
         name: Find by id
         meta:
           id: req_3ec21725e70e4e969b7fb62bd47bdaaa
           created: 1744762448918
-          modified: 1744775672733
+          modified: 1744847064049
           isPrivate: false
           sortKey: -1744688573837.5
         method: GET
@@ -141,7 +141,7 @@ collection:
           - id: pair_23ec4cdfe1054f3dbe5ea2ce941120a4
             name: Authorization
             value: Bearer
-              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJtY2cyMDA1NTdAZ21haWwuY29tIiwiaWF0IjoxNzQ0Nzc0NDExLCJleHAiOjE3NDQ3NzgwMTF9.Qnw_wzDdxDwODeXliiu_X9p_-BTMmMa4GWSYqg4d5Kc
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJyb2JlcnRvLmdhcmNpYUBlbWFpbC5jb20iLCJpYXQiOjE3NDQ4NDY3NzIsImV4cCI6MTc0NDg1MDM3Mn0.290IOBfNef4Slnb-vmMSB3C5vYFwlBN-iRuj9-MOFHA
             disabled: false
         settings:
           renderRequestBody: true
@@ -224,7 +224,7 @@ collection:
         meta:
           id: req_3af9d282963243b2b030a148e2fe7ead
           created: 1741417469351
-          modified: 1744775296615
+          modified: 1744849101444
           isPrivate: false
           sortKey: -1739604586507
         method: POST
@@ -232,11 +232,11 @@ collection:
           mimeType: application/json
           text: |-
             {
-            	"id_share": 3,
-            	"amount": "800.00",
-            	"category": "Pago único",
+            	"id_share": 23,
+            	"amount": 200.00,
+            	"category": "Comida",
             	"date": "2025-04-16T03:29:09.786Z",
-            	"description": "Pago completo de la deuda"
+            	"description": "Gasto empanadas"
             }
         headers:
           - name: Content-Type
@@ -248,7 +248,7 @@ collection:
           - id: pair_85e65f16d6ee40368d25c7dcff58c580
             name: Authorization
             value: Bearer
-              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJtY2cyMDA1NTdAZ21haWwuY29tIiwiaWF0IjoxNzQ0Nzc0NDExLCJleHAiOjE3NDQ3NzgwMTF9.Qnw_wzDdxDwODeXliiu_X9p_-BTMmMa4GWSYqg4d5Kc
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJsYXVyYS5kaWF6QGVtYWlsLmNvbSIsImlhdCI6MTc0NDg0NzA3OCwiZXhwIjoxNzQ0ODUwNjc4fQ.Wrff7oYtBUDcIfpGukqLhngjStd8iWen4IdpFcT8VN4
             disabled: false
         settings:
           renderRequestBody: true
@@ -258,12 +258,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: http://localhost:3000/expense/4
+      - url: http://localhost:3000/expense/64
         name: GetExpenseByID
         meta:
           id: req_86040a594ea44ad8bcd12398d21ec6dd
           created: 1741417469353
-          modified: 1744781904273
+          modified: 1744848456668
           isPrivate: false
           sortKey: -1739604586457
         method: GET
@@ -274,7 +274,7 @@ collection:
           - id: pair_1228acfe3d4c4fbf9fc77bcd7960405f
             name: Authorization
             value: Bearer
-              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJqdWFuLnBlcmV6QGVtYWlsLmNvbSIsImlhdCI6MTc0NDc4MTgyMywiZXhwIjoxNzQ0Nzg1NDIzfQ.t43tJYr0lq1zmcVzcjJULzKwjAUww4ikJ2GA--vNfgA
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJsYXVyYS5kaWF6QGVtYWlsLmNvbSIsImlhdCI6MTc0NDg0NzA3OCwiZXhwIjoxNzQ0ODUwNjc4fQ.Wrff7oYtBUDcIfpGukqLhngjStd8iWen4IdpFcT8VN4
             disabled: false
         settings:
           renderRequestBody: true
@@ -319,12 +319,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: http://localhost:3000/expense/deleteExpense/13
+      - url: http://localhost:3000/expense/deleteExpense/79
         name: DeleteExpense
         meta:
           id: req_90483c517b684bb78ffcd233c0b867eb
           created: 1741417469359
-          modified: 1744776041778
+          modified: 1744849269015
           isPrivate: false
           sortKey: -1739604586444.5
         method: DELETE
@@ -335,7 +335,59 @@ collection:
           - id: pair_1228acfe3d4c4fbf9fc77bcd7960405f
             name: Authorization
             value: Bearer
-              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJtY2cyMDA1NTdAZ21haWwuY29tIiwiaWF0IjoxNzQ0Nzc0NDExLCJleHAiOjE3NDQ3NzgwMTF9.Qnw_wzDdxDwODeXliiu_X9p_-BTMmMa4GWSYqg4d5Kc
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJsYXVyYS5kaWF6QGVtYWlsLmNvbSIsImlhdCI6MTc0NDg0NzA3OCwiZXhwIjoxNzQ0ODUwNjc4fQ.Wrff7oYtBUDcIfpGukqLhngjStd8iWen4IdpFcT8VN4
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/expense/share/10
+        name: FindExpensesByShare
+        meta:
+          id: req_0e4316e29a1b41668ac45f489977c8d3
+          created: 1744850783757
+          modified: 1744850982780
+          isPrivate: false
+          sortKey: -1739604586607
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+            id: pair_936e35743f3a424883e70287e5df554c
+          - id: pair_63c275d431f04d9ab89cd97bdcd9c06b
+            name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJsYXVyYS5kaWF6QGVtYWlsLmNvbSIsImlhdCI6MTc0NDg1MDg1NiwiZXhwIjoxNzQ0ODU0NDU2fQ.ZSyZKWH2-ArCwmq_PPzogXrdH6WCHXDdYmvPrNOPKUQ
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/expense/share/10/user/10
+        name: FindExpensesByShareUser
+        meta:
+          id: req_2c1aa1eade1847228c4bd5ca6957355f
+          created: 1744850946428
+          modified: 1744851087779
+          isPrivate: false
+          sortKey: -1739604586557
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+            id: pair_936e35743f3a424883e70287e5df554c
+          - id: pair_63c275d431f04d9ab89cd97bdcd9c06b
+            name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJsYXVyYS5kaWF6QGVtYWlsLmNvbSIsImlhdCI6MTc0NDg1MDg1NiwiZXhwIjoxNzQ0ODU0NDU2fQ.ZSyZKWH2-ArCwmq_PPzogXrdH6WCHXDdYmvPrNOPKUQ
             disabled: false
         settings:
           renderRequestBody: true
@@ -376,19 +428,19 @@ collection:
       modified: 1744762179996
       sortKey: -1741420973416
     children:
-      - url: http://localhost:3000/share/find/3
+      - url: http://localhost:3000/share/find/23
         name: FindById
         meta:
           id: req_eb8e359dabde4692aa9014bc87ddcaa1
           created: 1741420977701
-          modified: 1744781840833
+          modified: 1744849165185
           isPrivate: false
           sortKey: -1741420977701
         method: GET
         headers:
           - name: Authorization
             value: Bearer
-              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJqdWFuLnBlcmV6QGVtYWlsLmNvbSIsImlhdCI6MTc0NDc4MTgyMywiZXhwIjoxNzQ0Nzg1NDIzfQ.t43tJYr0lq1zmcVzcjJULzKwjAUww4ikJ2GA--vNfgA
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJyb2JlcnRvLmdhcmNpYUBlbWFpbC5jb20iLCJpYXQiOjE3NDQ4NDY3NzIsImV4cCI6MTc0NDg1MDM3Mn0.290IOBfNef4Slnb-vmMSB3C5vYFwlBN-iRuj9-MOFHA
             id: pair_fb48b57298804da1acb11c43bb7b54c1
         settings:
           renderRequestBody: true
@@ -403,7 +455,7 @@ collection:
         meta:
           id: req_4d2f934c43d9442b89aa47f231c41dbf
           created: 1741421045953
-          modified: 1744762199588
+          modified: 1744849016299
           isPrivate: false
           sortKey: -1741420977676
         method: POST
@@ -412,8 +464,9 @@ collection:
           text: |-
             {
             	"type": "share_expense",
-            	"name": "Nuevo share prueba 3",
-            	"status": "active"
+            	"name": "Share de prueba no se cual",
+            	"status": "active",
+            	"split_equally": true
             }
         headers:
           - name: Content-Type
@@ -421,7 +474,7 @@ collection:
             id: pair_0756a10ee5f0467eb2ffa92f4f0d6384
           - name: Authorization
             value: Bearer
-              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJwZXBlQGdtYWlsLmNvbSIsImlhdCI6MTc0NDc2MDcxNiwiZXhwIjoxNzQ0NzY0MzE2fQ.nO7QNekegxXE7h_CQl0QJSwrrer1j28dahNcxDN5Kr0
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJsYXVyYS5kaWF6QGVtYWlsLmNvbSIsImlhdCI6MTc0NDg0NzA3OCwiZXhwIjoxNzQ0ODUwNjc4fQ.Wrff7oYtBUDcIfpGukqLhngjStd8iWen4IdpFcT8VN4
             id: pair_557d67666f6b44d19318709044a0bd90
         settings:
           renderRequestBody: true
@@ -463,19 +516,19 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: http://localhost:3000/share/delete/1
+      - url: http://localhost:3000/share/delete/16
         name: DeleteShare
         meta:
           id: req_9eb1ccd0a8f64ded910302eea0b87402
           created: 1741422388225
-          modified: 1741422488591
+          modified: 1744845799702
           isPrivate: false
           sortKey: -1741420977601
         method: DELETE
         headers:
           - name: Authorization
             value: Bearer
-              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJqdWFuY2hvQGdtYWlsLmNvbSIsImlhdCI6MTc0MTQyMTI2NiwiZXhwIjoxNzQxNDI0ODY2fQ.k02rzWYuaKD_VNj62bKefVjV9wWW9-7tiWk765VDsvs
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJqdWFuLnBlcmV6QGVtYWlsLmNvbSIsImlhdCI6MTc0NDg0MzEzMCwiZXhwIjoxNzQ0ODQ2NzMwfQ.fcLMrA6NpMot2ghUvBSUa2rRGn6f1C6hKtc7u_gA6oY
             id: pair_6abfa13dd21848199bc39a71de742f27
         settings:
           renderRequestBody: true
@@ -512,7 +565,7 @@ collection:
         meta:
           id: req_89b1f993e77d403895a12284030abed5
           created: 1741755171073
-          modified: 1744777811719
+          modified: 1744849025701
           isPrivate: false
           sortKey: -1741420977663.5
         method: POST
@@ -520,8 +573,8 @@ collection:
           mimeType: application/json
           text: |-
             {
-            	"code": "S003",
-            	"id_user": 3,
+            	"code": "v0aKgJ2F",
+            	"id_user": 1,
             	"split_equally": true
             }
         headers:
@@ -530,7 +583,7 @@ collection:
             id: pair_0841559bb95844c19d614f77157e9675
           - name: Authorization
             value: Bearer
-              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJtY2cyMDA1NTdAZ21haWwuY29tIiwiaWF0IjoxNzQ0Nzc0NDExLCJleHAiOjE3NDQ3NzgwMTF9.Qnw_wzDdxDwODeXliiu_X9p_-BTMmMa4GWSYqg4d5Kc
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJyb2JlcnRvLmdhcmNpYUBlbWFpbC5jb20iLCJpYXQiOjE3NDQ4NDY3NzIsImV4cCI6MTc0NDg1MDM3Mn0.290IOBfNef4Slnb-vmMSB3C5vYFwlBN-iRuj9-MOFHA
             id: pair_eaacef8ffda74ade93a3891d44631c77
         settings:
           renderRequestBody: true
@@ -587,19 +640,19 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: http://localhost:3000/share/members/split-equally/8
+      - url: http://localhost:3000/share/members/split-equally/23
         name: Split Equally
         meta:
           id: req_6621a914a3ba4dd3966519da36aeebfa
           created: 1742071274622
-          modified: 1744777856292
+          modified: 1744849213065
           isPrivate: false
           sortKey: -1741420977613.5
         method: PATCH
         headers:
           - name: Authorization
             value: Bearer
-              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJwZXBlQGdtYWlsLmNvbSIsImlhdCI6MTc0MjA3MTMzNiwiZXhwIjoxNzQyMDc0OTM2fQ.VRiEIjGLTFzIAdOdw8aaFcuIMpse4aYyoPiyUtUVFpk
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJyb2JlcnRvLmdhcmNpYUBlbWFpbC5jb20iLCJpYXQiOjE3NDQ4NDY3NzIsImV4cCI6MTc0NDg1MDM3Mn0.290IOBfNef4Slnb-vmMSB3C5vYFwlBN-iRuj9-MOFHA
             id: pair_7c24b59bb98045888558c4eb5c03f5d7
         settings:
           renderRequestBody: true
@@ -641,19 +694,19 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: http://localhost:3000/share/members/all/1
+      - url: http://localhost:3000/share/members/all/23
         name: FindByShareMembers
         meta:
           id: req_a5323b2c51dc4edca2a2c5469f13e8c1
           created: 1744777935389
-          modified: 1744781925104
+          modified: 1744849076115
           isPrivate: false
           sortKey: -1741420977501
         method: GET
         headers:
           - name: Authorization
             value: Bearer
-              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJqdWFuLnBlcmV6QGVtYWlsLmNvbSIsImlhdCI6MTc0NDc4MTgyMywiZXhwIjoxNzQ0Nzg1NDIzfQ.t43tJYr0lq1zmcVzcjJULzKwjAUww4ikJ2GA--vNfgA
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJyb2JlcnRvLmdhcmNpYUBlbWFpbC5jb20iLCJpYXQiOjE3NDQ4NDY3NzIsImV4cCI6MTc0NDg1MDM3Mn0.290IOBfNef4Slnb-vmMSB3C5vYFwlBN-iRuj9-MOFHA
             id: pair_fb48b57298804da1acb11c43bb7b54c1
         settings:
           renderRequestBody: true

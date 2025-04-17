@@ -32,8 +32,10 @@ const expenseRepository = new ExpenseRepository();
 const expenseService = new ExpenseService(expenseRepository, userService, shareService);
 const expenseController = new ExpenseController(expenseService);
 
-router.get('/:id', verifyToken, expenseController.findExpenseByID)
-router.get('/user/:username', verifyToken, expenseController.findExpenseByUser)
+router.get('/:id', verifyToken, expenseController.findExpenseByID);
+router.get('/user/:username', verifyToken, expenseController.findExpenseByUser);
+router.get('/share/:shareId', verifyToken, expenseController.findExpensesByShare);
+router.get('/share/:shareId/user/:userId', verifyToken, expenseController.findExpensesByShareUser);
 router.post('/createExpense', verifyToken, expenseValidator.createExpenseValidator, expenseValidator.validatorExpense, expenseController.createExpense);
 router.patch('/updateExpense/:id', verifyToken, expenseValidator.updateExpenseValidator, expenseValidator.validatorExpense,expenseController.updateExpense);
 router.delete('/deleteExpense/:id', verifyToken, expenseController.deleteExpense);
