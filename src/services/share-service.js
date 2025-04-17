@@ -85,6 +85,36 @@ class ShareService {
         return await this.shareSplitService.splitEqually(share);
     }
 
+    async updateShareAfterExpense(shareId, userId, amount) {
+        const share = await this.findShareById(shareId);
+        if (!share) {
+            throw new Error("Share no encontrado");
+        }
+        console.log('Gasto nuevo');
+        const newPaidAmount = parseFloat(share.paid_amount) + parseFloat(amount);
+        const updatedShare = await this.updateShare({
+            id_share: shareId,
+            paid_amount: newPaidAmount
+        });
+        console.log(`Nuevo gasto modificado en share ${newPaidAmount}`);
+        await this.shareSplitService.updateSplitsAfterExpense(updatedShare, userId, amount);
+    }
+    
+    async updateShareAfterExpenseChange(shareId, userId, amountDifference) {
+        const share = await this.findShareById(shareId);
+        if (!share) {
+            throw new Error("Share no encontrado");
+        }
+        
+        const newPaidAmount = parseFloat(share.paid_amount) + parseFloat(amountDifference);
+        const updatedShare = await this.updateShare({
+            id_share: shareId,
+            paid_amount: newPaidAmount
+        });
+        
+        await this.shareSplitService.updateSplitsAfterExpense(updatedShare, userId, amountDifference);
+    }
+
     async findMembersByShare(idShare) {
         return await this.shareMemberService.findMembersByShare(idShare);
     }

@@ -34,6 +34,7 @@ class ExpenseController {
             return res.status(400).json({ message: error.message });
         }
     };
+    
     updateExpense = async (req, res) => {
         try {
             const updatedExpense = await this.expenseService.updateExpense(req.body, req.params.id);
@@ -49,6 +50,7 @@ class ExpenseController {
             await this.expenseService.deleteExpense(req.params.id);
             return res.status(200).json({ message: "Gasto eliminado correctamente" });
         } catch (error) {
+            console.error(error);
             return res.status(400).json({ message: error.message });
         }
     };

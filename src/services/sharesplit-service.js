@@ -35,18 +35,63 @@ class ShareSplitService {
         return await this.shareSplitRepository.updateSplit(splitData, userId, shareId);
     }
 
+    async updateSplitsAfterExpense(share, userId, amount) {
+        const splits = await this.findSplitsByShare(share.id_share);
+        if (splits.length === 0) {
+            throw new Error("No hay splits para actualizar balances");
+        }
+        
+        // Actualizar el paid del usuario que hizo el gasto
+        const userSplit = splits.find(split => {
+            console.log(split.id_user);
+            return split.id_user === userId}
+        );
+
+        if (userSplit) {
+            const newPaid = parseFloat(userSplit.paid) + parseFloat(amount);
+            await this.updateSplit({
+                paid: newPaid
+            }, userId, share.id_share);
+        }
+        
+        if(share.split_equally) {
+            console.log('dividir gasto igual');
+            await this.splitEqually(share);
+        } else {
+            console.log('dividir diferente');
+            await this.updateSplitData(share);
+        }
+    }
+
+    async updateSplitData(share){
+        const splits = await this.findSplitsByShare(share.id_share);
+
+        if (splits.length === 0) {
+            throw new Error("No hay splits para dividir el monto.");
+        }
+
+        for (const split of splits) {
+            
+            let assignedAmount = (share.paid_amount * split.percentage) / 100;
+            let balance = split.paid - assignedAmount;
+            let splitData = {
+                percentage: percentage,
+                assigned_amount: assignedAmount,
+                balance: balance
+            }
+            await this.updateSplit(splitData, split.id_user, share.id_share)
+        }
+    }
+
     async modifyPercentage(share, percentages) {
         if (this.validatePercentages(percentages)) {
             console.log(percentages);
             for (const data of percentages) {
                 let split = await this.findSplitByUserShare(share.id_share, data.id_user);
-                console.log(split);
                 let paidAmount = split.paid;
-                let assignedAmount = (share.amount * data.percentage) / 100;
+                let assignedAmount = (share.paid_amount * data.percentage) / 100;
                 let balance = paidAmount - assignedAmount;
-                console.log(paidAmount);
-                console.log(assignedAmount);
-                console.log(balance);
+                
                 let splitData = {
                     percentage: data.percentage,
                     assigned_amount: assignedAmount,
@@ -69,7 +114,7 @@ class ShareSplitService {
         return true;
     }
 
-    //Se llama al añadir un miembro, eliminar un split o cuando se desee
+    //Se llama al añadir un miembro, eliminar un split o al añadir un gasto 
     async splitEqually(share) {
         const splits = await this.findSplitsByShare(share.id_share);
 
@@ -79,15 +124,14 @@ class ShareSplitService {
 
         const percentage = 100 / splits.length;
         for (const split of splits) {
-            let assignedAmount = (share.amount * percentage) / 100;
+            
+            let assignedAmount = (share.paid_amount * percentage) / 100;
             let balance = split.paid - assignedAmount;
-
             let splitData = {
                 percentage: percentage,
                 assigned_amount: assignedAmount,
                 balance: balance
             }
-            console.log(splitData);
             await this.updateSplit(splitData, split.id_user, share.id_share)
         }
     }

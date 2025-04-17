@@ -1,8 +1,9 @@
 class ExpenseService {
 
-    constructor(expenseRepository, userService) {
+    constructor(expenseRepository, userService, shareService) {
         this.userService = userService;
         this.expenseRepository = expenseRepository;
+        this.shareService = shareService;
     }
 
     async getExpenseByUser(username) {
@@ -15,20 +16,55 @@ class ExpenseService {
 
     async createExpense(expenseDTO, userEmail) {
         const userId = await this.userService.getIdByEmail(userEmail);
-        console.log(userId);
         if (!userId) {
             throw new Error("Usuario no encontrado");
         }
         expenseDTO.id_user = userId;
-        return await this.expenseRepository.createExpense(expenseDTO);
+        
+        const expense = await this.expenseRepository.createExpense(expenseDTO);        
+        
+        // Para volver a recalcular los balances
+        await this.shareService.updateShareAfterExpense(expenseDTO.id_share, userId, expenseDTO.amount);
+        
+        return expense;
     }
 
     async updateExpense(updateExpenseDTO, expenseID) {
-        return await this.expenseRepository.updateExpense(updateExpenseDTO, expenseID);
+        const originalExpense = await this.getExpenseByID(expenseID);
+        if (!originalExpense) {
+            throw new Error("Gasto no encontrado");
+        }
+
+        const updatedExpense = await this.expenseRepository.updateExpense(updateExpenseDTO, expenseID);
+        
+        // Si el monto cambia, actualizar el share y los balances
+        if (originalExpense.amount !== updateExpenseDTO.amount) {
+            const amountDifference = updateExpenseDTO.amount - originalExpense.amount;
+            await this.shareService.updateShareAfterExpenseChange(
+                originalExpense.id_share, 
+                originalExpense.id_user, 
+                parseFloat(amountDifference)
+            );
+        }
+        return updatedExpense;
     }
 
     async deleteExpense(expenseID) {
-        return await this.expenseRepository.deleteExpense(expenseID);
+        const expense = await this.getExpenseByID(expenseID);
+        if (!expense) {
+            throw new Error("Gasto no encontrado");
+        }
+        
+        const deleted = await this.expenseRepository.deleteExpense(expenseID);
+        
+        // Actualizar el share y balances (resta el monto del gasto)
+        await this.shareService.updateShareAfterExpenseChange(
+            expense.id_share,
+            expense.id_user,
+            parseFloat(-expense.amount)
+        );
+
+        return deleted;
     }
 
 }
