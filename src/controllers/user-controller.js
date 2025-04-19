@@ -45,6 +45,17 @@ class UserController {
         }
     }
 
+    findByEmail = async (req, res) => {
+        try{
+            return res.status(200).json({
+                data: await this.userService.findByEmail(req.params.email)
+            });
+        }catch(error) {
+            console.error(error);
+            return res.status(404).json({message: "Error obteniendo los usuarios", error: error.message});
+        }
+    }
+
     delete = async (req, res) => {
         try {
             return res.status(200).json({

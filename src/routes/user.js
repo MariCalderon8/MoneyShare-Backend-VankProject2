@@ -16,6 +16,7 @@ router.post('/login', userValidator.loginValidator, userValidator.validatorUser,
 router.get('/profile', verifyToken, userController.profile);
 router.get('/all', verifyToken, userController.findAllUsers);
 router.get('/:id', verifyToken, userController.findById);
+router.get('/email/:email', verifyToken, userController.findByEmail);
 router.delete('/delete/:email', verifyToken, userController.delete);
 router.patch('/update/:idUser', verifyToken, userController.update);
 

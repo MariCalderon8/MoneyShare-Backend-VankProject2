@@ -29,6 +29,10 @@ class UserService {
     return await this.userRepository.findUserById(id);
   }
 
+  async findByEmail(email) {
+    return await this.userRepository.findUserByEmail(email);
+  }
+  
   async delete(email) {
     let id = await this.getIdByEmail(email);
     return await this.userRepository.delete(id);

@@ -14,6 +14,12 @@ class ShareSplitRepository {
         })
     }
 
+    async findSplitsByUser(userId) {
+        return await ShareSplit.findAll({
+            where: {id_user: userId}
+        })
+    }
+
     async findSplitByUserShare(shareId, userId){
         return await ShareSplit.findOne({
             where: {

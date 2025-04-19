@@ -16,6 +16,10 @@ class ShareSplitService {
         return await this.shareSplitRepository.findSplitsByShare(shareId);
     }
 
+    async findSplitsByUser(userId){
+        return await this.shareSplitRepository.findSplitsByUser(userId);
+    }
+
     async createSplit(idUser, share, splitEqually) {
         let split = await this.findSplitByUserShare(share.id_share, idUser);
         if(split) {

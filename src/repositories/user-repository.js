@@ -25,6 +25,14 @@ class UserRepository {
     return await User.findAll();
   }
 
+  async findUserByEmail(email) {
+    let user = await User.findOne({ where: { email: email } });
+    if (!user) {
+      throw new Error("Usuario no encontrado");
+    }
+    return user;
+  }
+
   async findUserById(id) {
     let user = await User.findByPk(id);
     if (!user) {

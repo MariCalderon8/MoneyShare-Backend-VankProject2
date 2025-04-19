@@ -22,6 +22,16 @@ class ShareController {
         }
     };
 
+    findSharesByUser = async (req, res) => {
+        try {
+            const data = await this.shareService.findSharesByUser(req.dataToken.userEmail);
+            return res.status(200).json({ data });
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ message: 'Error al buscar los shares', error: error.message });
+        }
+    };
+
     createShare = async (req, res) => {
         try {
             const data = await this.shareService.createShare(req.body, req.dataToken.userEmail);

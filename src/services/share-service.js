@@ -15,6 +15,23 @@ class ShareService {
         return await this.shareRepository.findShareByCode(code);
     }
 
+    async findSharesByUser(email) {
+        let userId = await this.userService.getIdByEmail(email);
+        if (!userId) {
+            throw new Error("Email no válido");
+        }
+        const splits = await this.shareSplitService.findSplitsByUser(userId);
+        const shares = [];
+
+        for (const split of splits) {
+            const share = await this.findShareById(split.id_share);
+            if (share) {
+                shares.push(share);
+            }
+        }
+        return shares;
+    }
+
     async createShare(shareData, userEmail) {
         shareData.id_creator = await this.userService.getIdByEmail(userEmail);
 
@@ -177,7 +194,7 @@ class ShareService {
             throw new Error("El usuario no pertenece al share");
         }
 
-        if(splitPaidUser.balance <= 0) {
+        if (splitPaidUser.balance <= 0) {
             throw new Error("No se le puede pagar a usuarios con balance neutro o negativo")
         }
     }
