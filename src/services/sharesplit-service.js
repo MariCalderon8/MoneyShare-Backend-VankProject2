@@ -16,6 +16,9 @@ class ShareSplitService {
         return await this.shareSplitRepository.findSplitsByShare(shareId);
     }
 
+    async countShareMembers(shareId) {
+        return await this.shareSplitRepository.countShareMembers(shareId);
+    }
     async findSplitsByUser(userId){
         return await this.shareSplitRepository.findSplitsByUser(userId);
     }

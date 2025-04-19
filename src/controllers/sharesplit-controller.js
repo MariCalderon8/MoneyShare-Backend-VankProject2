@@ -41,6 +41,19 @@ class ShareSplitController {
         }
     }
 
+    countShareMembers = async (req, res) => {
+        try {
+            return res.status(200).json({
+                data: await this.shareSplitService.countShareMembers(req.params.shareId)
+            })
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({
+                message: error.message
+            })
+        }
+    }
+
     // createSplit = async (req, res) => {
     //     try {
     //         return res.status(200).json({

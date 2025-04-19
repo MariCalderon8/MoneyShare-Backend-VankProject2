@@ -14,6 +14,13 @@ class ShareSplitRepository {
         })
     }
 
+    async countShareMembers(shareId){
+        return await ShareSplit.count({
+            where: {
+                id_share: shareId
+            }
+        })
+    }
     async findSplitsByUser(userId) {
         return await ShareSplit.findAll({
             where: {id_user: userId}

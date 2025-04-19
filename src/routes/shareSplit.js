@@ -13,6 +13,7 @@ const shareSplitController = new ShareSplitController(shareSplitService);
 
 router.get('/:id', verifyToken, shareSplitController.findSplitById)
 router.get('/share/:id', verifyToken, shareSplitController.findSplitsByShare)
+router.get('/count/:shareId', verifyToken, shareSplitController.countShareMembers)
 router.get('/share/:shareId/user/:userId', verifyToken, shareSplitController.findSplitByUserShare)
 
 //router.post('/', verifyToken, shareSplitController.createSplit);
