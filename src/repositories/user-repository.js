@@ -72,12 +72,12 @@ class UserRepository {
       const user = await User.findOne({ where: { email: info.email } });
 
       if (!user) {
-        return { login: false };
+        throw new Error("El correo no es válido");
       }
 
       const validPassword = await bcrypt.compare(info.password, user.password);
       if (!validPassword) {
-        return { login: false };
+        throw new Error("La contraseña no es válida");
       }
 
       const token = jwt.sign(
