@@ -64,7 +64,7 @@ class ShareController {
     addMember = async (req, res) => {
         try{
             const addMember = await this.shareService.addMember(req.body.code, req.dataToken.userEmail);
-            return res.status(200).json({ message: "Usuario agregado exitosamente" });
+            return res.status(200).json({  message: "Usuario agregado con éxito", data: addMember });
         } catch (error) {
             console.error(error);
             return res.status(400).json({ message: error.message });

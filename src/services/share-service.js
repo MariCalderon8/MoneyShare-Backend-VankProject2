@@ -82,6 +82,7 @@ class ShareService {
         }
         console.log(share.split_equally);
         await this.shareSplitService.createSplit(userId, share, share.split_equally);
+        return share;
     }
 
     async findSplitByShareUser(shareId, userId) {
