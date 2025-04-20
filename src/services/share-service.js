@@ -33,17 +33,18 @@ class ShareService {
     }
 
     async createShare(shareData, userEmail) {
+        console.log(userEmail);
         shareData.id_creator = await this.userService.getIdByEmail(userEmail);
 
         let code;
         do {
             code = await this.createCode();
-        } while (!(await this.validateCode(code))); // Espera la validación correcta
+        } while (!(await this.validateCode(code))); 
 
         shareData.code = code;
 
         let createShare = await this.shareRepository.createShare(shareData);
-        await this.addMember(code, shareData.id_creator, true);
+        await this.addMember(code, userEmail);
 
         return createShare;
     }
@@ -70,12 +71,17 @@ class ShareService {
         return await this.shareRepository.updateShare(newData);
     }
 
-    async addMember(code, userId, splitEqually) {
+    async addMember(code, userEmail) {
+        let userId = await this.userService.getIdByEmail(userEmail);
+        if(!userId) {
+            throw new Error('Usuario no encontrado');
+        }
         let share = await this.findShareByCode(code);
         if (!share) {
             throw new Error('Share no encontrado');
         }
-        await this.shareSplitService.createSplit(userId, share, splitEqually);
+        console.log(share.split_equally);
+        await this.shareSplitService.createSplit(userId, share, share.split_equally);
     }
 
     async findSplitByShareUser(shareId, userId) {
