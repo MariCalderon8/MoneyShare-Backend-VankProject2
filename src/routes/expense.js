@@ -12,6 +12,8 @@ import ShareService from '../services/share-service.js';
 import ShareRepository from '../repositories/share-repository.js';
 import ShareSplitRepository from '../repositories/sharesplit-repository.js';
 import ShareMemberService from '../services/sharemember-service.js';
+import NotificationService from '../services/notification-service.js';
+import NotificationRepository from '../repositories/notification-repository.js';
 
 
 const router = express.Router();
@@ -19,8 +21,11 @@ const router = express.Router();
 const userRepository = new UserRepository();
 const userService = new UserService(userRepository);
 
+const notificationRepository = new NotificationRepository();
+const notificationService = new NotificationService(notificationRepository, userService);
+
 const shareSplitRepository = new ShareSplitRepository();
-const shareSplitService = new ShareSplitService(shareSplitRepository);
+const shareSplitService = new ShareSplitService(shareSplitRepository, notificationService);
 
 const shareMemberRepository = new ShareMemberRespository();
 const shareMemberService = new ShareMemberService(shareMemberRepository);

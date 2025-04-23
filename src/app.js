@@ -7,7 +7,7 @@ import user from './routes/user.js';
 import share from './routes/share.js';
 import expense from './routes/expense.js';
 import shareSplit from './routes/shareSplit.js';
-
+import notification from './routes/notification.js';
 import { connectSequelize } from './database/sequelize.js';
 import { models } from './dto/initializeDTOS.js';
 
@@ -30,6 +30,7 @@ app.use('/user', user);
 app.use('/share', share)
 app.use('/expense', expense);
 app.use('/share-split', shareSplit);
+app.use('/notification', notification);
 
 async function startServer() {
   try {

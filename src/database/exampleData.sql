@@ -155,3 +155,131 @@ INSERT INTO "share_split" (id_share, id_user, percentage, assigned_amount, paid,
 (10, 4, 25.00, 900.00, 0.00, -900.00),       -- Ana no ha pagado, debe 900 = balance -900
 (10, 6, 25.00, 900.00, 1200.00, 300.00),     -- Paula pagó Udemy (1200), debe 900 = balance +300
 (10, 10, 25.00, 900.00, 2400.00, 1500.00);   -- Laura pagó Coursera (2400), debe 900 = balance +1500
+
+-- Inserciones para la tabla "notification"
+-- Notificaciones de bienvenida para todos los usuarios
+INSERT INTO "notification" (id_user, message, type, date) VALUES
+(1, '🎉 ¡Bienvenido a MoneyShare! 💸\nTu lugar para compartir gastos y ahorrar en equipo 🙌', 'general', '2023-06-01 08:00:00'),
+(2, '🎉 ¡Bienvenido a MoneyShare! 💸\nTu lugar para compartir gastos y ahorrar en equipo 🙌', 'general', '2023-06-01 09:15:00'),
+(3, '🎉 ¡Bienvenido a MoneyShare! 💸\nTu lugar para compartir gastos y ahorrar en equipo 🙌', 'general', '2023-06-01 10:30:00'),
+(4, '🎉 ¡Bienvenido a MoneyShare! 💸\nTu lugar para compartir gastos y ahorrar en equipo 🙌', 'general', '2023-06-01 11:45:00'),
+(5, '🎉 ¡Bienvenido a MoneyShare! 💸\nTu lugar para compartir gastos y ahorrar en equipo 🙌', 'general', '2023-06-02 08:30:00'),
+(6, '🎉 ¡Bienvenido a MoneyShare! 💸\nTu lugar para compartir gastos y ahorrar en equipo 🙌', 'general', '2023-06-02 09:45:00'),
+(7, '🎉 ¡Bienvenido a MoneyShare! 💸\nTu lugar para compartir gastos y ahorrar en equipo 🙌', 'general', '2023-06-02 10:15:00'),
+(8, '🎉 ¡Bienvenido a MoneyShare! 💸\nTu lugar para compartir gastos y ahorrar en equipo 🙌', 'general', '2023-06-02 11:30:00'),
+(9, '🎉 ¡Bienvenido a MoneyShare! 💸\nTu lugar para compartir gastos y ahorrar en equipo 🙌', 'general', '2023-06-02 14:00:00'),
+(10, '🎉 ¡Bienvenido a MoneyShare! 💸\nTu lugar para compartir gastos y ahorrar en equipo 🙌', 'general', '2023-06-02 15:20:00');
+
+-- Notificaciones de creación de shares
+INSERT INTO "notification" (id_user, message, type, date) VALUES
+(1, '🎉 ¡Creaste un nuevo share! 💸\n¡Ya puedes empezar a compartir gastos en Viaje a Bariloche! 💸', 'general', '2023-07-10 10:00:00'),
+(2, '🎉 ¡Creaste un nuevo share! 💸\n¡Ya puedes empezar a compartir gastos en Alquiler Departamento! 💸', 'general', '2023-06-01 08:00:00'),
+(3, '🎉 ¡Creaste un nuevo share! 💸\n¡Ya puedes empezar a compartir gastos en Fiesta de Cumpleaños! 💸', 'general', '2023-07-15 14:30:00'),
+(4, '🎉 ¡Creaste un nuevo share! 💸\n¡Ya puedes empezar a compartir gastos en Ahorro Vacaciones 2024! 💸', 'general', '2023-06-15 09:00:00'),
+(5, '🎉 ¡Creaste un nuevo share! 💸\n¡Ya puedes empezar a compartir gastos en Gastos de Transporte! 💸', 'general', '2023-07-01 06:00:00'),
+(6, '🎉 ¡Creaste un nuevo share! 💸\n¡Ya puedes empezar a compartir gastos en Sistema de Cine en Casa! 💸', 'general', '2023-07-20 15:00:00'),
+(7, '🎉 ¡Creaste un nuevo share! 💸\n¡Ya puedes empezar a compartir gastos en Almuerzos de Oficina! 💸', 'general', '2023-07-03 11:00:00'),
+(8, '🎉 ¡Creaste un nuevo share! 💸\n¡Ya puedes empezar a compartir gastos en Deuda de Alquiler! 💸', 'general', '2023-07-05 16:00:00'),
+(9, '🎉 ¡Creaste un nuevo share! 💸\n¡Ya puedes empezar a compartir gastos en Equipamiento Deportivo! 💸', 'general', '2023-06-10 17:30:00'),
+(10, '🎉 ¡Creaste un nuevo share! 💸\n¡Ya puedes empezar a compartir gastos en Cursos Online 2023! 💸', 'general', '2023-07-12 20:00:00');
+
+-- Notificaciones de unión a shares (para miembros que no crearon el share)
+INSERT INTO "notification" (id_user, message, type, date) VALUES
+-- Share 1: Viaje a Bariloche
+(2, '🎉 ¡Te uniste al share "Viaje a Bariloche"! 💸\n¡Ya puedes empezar a compartir gastos en el equipo! 💸', 'general', '2023-07-10 10:30:00'),
+(3, '🎉 ¡Te uniste al share "Viaje a Bariloche"! 💸\n¡Ya puedes empezar a compartir gastos en el equipo! 💸', 'general', '2023-07-10 10:45:00'),
+(4, '🎉 ¡Te uniste al share "Viaje a Bariloche"! 💸\n¡Ya puedes empezar a compartir gastos en el equipo! 💸', 'general', '2023-07-10 11:00:00'),
+
+-- Share 2: Alquiler Departamento
+(5, '🎉 ¡Te uniste al share "Alquiler Departamento"! 💸\n¡Ya puedes empezar a compartir gastos en el equipo! 💸', 'general', '2023-06-01 08:30:00'),
+(6, '🎉 ¡Te uniste al share "Alquiler Departamento"! 💸\n¡Ya puedes empezar a compartir gastos en el equipo! 💸', 'general', '2023-06-01 08:45:00'),
+
+-- Share 3: Fiesta de Cumpleaños
+(5, '🎉 ¡Te uniste al share "Fiesta de Cumpleaños"! 💸\n¡Ya puedes empezar a compartir gastos en el equipo! 💸', 'general', '2023-07-15 15:00:00'),
+(7, '🎉 ¡Te uniste al share "Fiesta de Cumpleaños"! 💸\n¡Ya puedes empezar a compartir gastos en el equipo! 💸', 'general', '2023-07-15 15:15:00'),
+(8, '🎉 ¡Te uniste al share "Fiesta de Cumpleaños"! 💸\n¡Ya puedes empezar a compartir gastos en el equipo! 💸', 'general', '2023-07-15 15:30:00'),
+(9, '🎉 ¡Te uniste al share "Fiesta de Cumpleaños"! 💸\n¡Ya puedes empezar a compartir gastos en el equipo! 💸', 'general', '2023-07-15 15:45:00'),
+
+-- Share 4: Ahorro Vacaciones 2024
+(1, '🎉 ¡Te uniste al share "Ahorro Vacaciones 2024"! 💸\n¡Ya puedes empezar a compartir gastos en el equipo! 💸', 'general', '2023-06-15 09:30:00'),
+(7, '🎉 ¡Te uniste al share "Ahorro Vacaciones 2024"! 💸\n¡Ya puedes empezar a compartir gastos en el equipo! 💸', 'general', '2023-06-15 09:45:00'),
+(10, '🎉 ¡Te uniste al share "Ahorro Vacaciones 2024"! 💸\n¡Ya puedes empezar a compartir gastos en el equipo! 💸', 'general', '2023-06-15 10:00:00');
+
+-- Notificaciones de gastos añadidos
+INSERT INTO "notification" (id_user, message, type, date) VALUES
+-- Share 1: Viaje a Bariloche - Gastos de Juan (id_user = 1)
+(1, '🎉 Añadiste un gasto de $4500.00 en el share "Viaje a Bariloche" \n ¡Listo para compartir entre todos! 🤝', 'general', '2023-07-10 12:30:00'),
+(2, '🎉 Juan Pérez añadió un gasto de $4500.00 en el share "Viaje a Bariloche" \n ¡No olvides pagar tu parte! 🎯', 'general', '2023-07-10 12:30:00'),
+(3, '🎉 Juan Pérez añadió un gasto de $4500.00 en el share "Viaje a Bariloche" \n ¡No olvides pagar tu parte! 🎯', 'general', '2023-07-10 12:30:00'),
+(4, '🎉 Juan Pérez añadió un gasto de $4500.00 en el share "Viaje a Bariloche" \n ¡No olvides pagar tu parte! 🎯', 'general', '2023-07-10 12:30:00'),
+
+(1, '🎉 Añadiste un gasto de $1500.00 en el share "Viaje a Bariloche" \n ¡Listo para compartir entre todos! 🤝', 'general', '2023-07-13 09:30:00'),
+(2, '🎉 Juan Pérez añadió un gasto de $1500.00 en el share "Viaje a Bariloche" \n ¡No olvides pagar tu parte! 🎯', 'general', '2023-07-13 09:30:00'),
+(3, '🎉 Juan Pérez añadió un gasto de $1500.00 en el share "Viaje a Bariloche" \n ¡No olvides pagar tu parte! 🎯', 'general', '2023-07-13 09:30:00'),
+(4, '🎉 Juan Pérez añadió un gasto de $1500.00 en el share "Viaje a Bariloche" \n ¡No olvides pagar tu parte! 🎯', 'general', '2023-07-13 09:30:00'),
+
+-- Share 1: Viaje a Bariloche - Gastos de Carlos (id_user = 3)
+(3, '🎉 Añadiste un gasto de $3200.00 en el share "Viaje a Bariloche" \n ¡Listo para compartir entre todos! 🤝', 'general', '2023-07-11 10:15:00'),
+(1, '🎉 Carlos Rodríguez añadió un gasto de $3200.00 en el share "Viaje a Bariloche" \n ¡No olvides pagar tu parte! 🎯', 'general', '2023-07-11 10:15:00'),
+(2, '🎉 Carlos Rodríguez añadió un gasto de $3200.00 en el share "Viaje a Bariloche" \n ¡No olvides pagar tu parte! 🎯', 'general', '2023-07-11 10:15:00'),
+(4, '🎉 Carlos Rodríguez añadió un gasto de $3200.00 en el share "Viaje a Bariloche" \n ¡No olvides pagar tu parte! 🎯', 'general', '2023-07-11 10:15:00');
+
+-- Notificaciones de pagos entre usuarios
+INSERT INTO "notification" (id_user, message, type, date) VALUES
+-- Share 1: Viaje a Bariloche - Pagos de María a Juan
+(2, '✅ Pagaste $1325.00 a Juan Pérez en el share "Viaje a Bariloche" ¡Gracias por mantener todo al día! 📅', 'payment', '2023-07-16 14:00:00'),
+(1, '💸 María González te pagó $1325.00 en el share "Viaje a Bariloche" ¡Ya casi se completa el reparto! 🎯', 'payment', '2023-07-16 14:00:00'),
+
+-- Share 1: Viaje a Bariloche - Pagos de Ana a Carlos
+(4, '✅ Pagaste $1625.00 a Carlos Rodríguez en el share "Viaje a Bariloche" ¡Gracias por mantener todo al día! 📅', 'payment', '2023-07-17 10:30:00'),
+(3, '💸 Ana Martínez te pagó $1625.00 en el share "Viaje a Bariloche" ¡Ya casi se completa el reparto! 🎯', 'payment', '2023-07-17 10:30:00'),
+
+-- Share 2: Alquiler Departamento - Pagos de Luis a María
+(5, '✅ Pagaste $1500.00 a María González en el share "Alquiler Departamento" ¡Gracias por mantener todo al día! 📅', 'payment', '2023-06-20 13:15:00'),
+(2, '💸 Luis Sánchez te pagó $1500.00 en el share "Alquiler Departamento" ¡Ya casi se completa el reparto! 🎯', 'payment', '2023-06-20 13:15:00'),
+
+-- Share 2: Alquiler Departamento - Pagos de Paula a María
+(6, '✅ Pagaste $2000.00 a María González en el share "Alquiler Departamento" ¡Gracias por mantener todo al día! 📅', 'payment', '2023-06-22 17:45:00'),
+(2, '💸 Paula López te pagó $2000.00 en el share "Alquiler Departamento" ¡Ya casi se completa el reparto! 🎯', 'payment', '2023-06-22 17:45:00'),
+
+-- Share 8: Deuda de Alquiler - Pagos de Sofía a María
+(8, '✅ Pagaste $2000.00 a María González en el share "Deuda de Alquiler" ¡Gracias por mantener todo al día! 📅', 'payment', '2023-08-05 11:30:00'),
+(2, '💸 Sofía Torres te pagó $2000.00 en el share "Deuda de Alquiler" ¡Ya casi se completa el reparto! 🎯', 'payment', '2023-08-05 11:30:00');
+
+-- Notificaciones adicionales para shares completados
+INSERT INTO "notification" (id_user, message, type, date) VALUES
+-- Share 2: Alquiler Departamento (completado)
+(2, '🎉 ¡El share "Alquiler Departamento" ha sido completado exitosamente! Todos los pagos han sido realizados. 🎯', 'general', '2023-06-30 23:59:59'),
+(5, '🎉 ¡El share "Alquiler Departamento" ha sido completado exitosamente! Todos los pagos han sido realizados. 🎯', 'general', '2023-06-30 23:59:59'),
+(6, '🎉 ¡El share "Alquiler Departamento" ha sido completado exitosamente! Todos los pagos han sido realizados. 🎯', 'general', '2023-06-30 23:59:59'),
+
+-- Share 5: Gastos de Transporte (completado)
+(5, '🎉 ¡El share "Gastos de Transporte" ha sido completado exitosamente! Todos los pagos han sido realizados. 🎯', 'general', '2023-07-31 23:59:59'),
+(8, '🎉 ¡El share "Gastos de Transporte" ha sido completado exitosamente! Todos los pagos han sido realizados. 🎯', 'general', '2023-07-31 23:59:59'),
+(9, '🎉 ¡El share "Gastos de Transporte" ha sido completado exitosamente! Todos los pagos han sido realizados. 🎯', 'general', '2023-07-31 23:59:59'),
+
+-- Share 9: Equipamiento Deportivo (completado)
+(9, '🎉 ¡El share "Equipamiento Deportivo" ha sido completado exitosamente! Todos los pagos han sido realizados. 🎯', 'general', '2023-07-10 17:30:00'),
+(10, '🎉 ¡El share "Equipamiento Deportivo" ha sido completado exitosamente! Todos los pagos han sido realizados. 🎯', 'general', '2023-07-10 17:30:00'),
+(1, '🎉 ¡El share "Equipamiento Deportivo" ha sido completado exitosamente! Todos los pagos han sido realizados. 🎯', 'general', '2023-07-10 17:30:00'),
+(3, '🎉 ¡El share "Equipamiento Deportivo" ha sido completado exitosamente! Todos los pagos han sido realizados. 🎯', 'general', '2023-07-10 17:30:00'),
+(5, '🎉 ¡El share "Equipamiento Deportivo" ha sido completado exitosamente! Todos los pagos han sido realizados. 🎯', 'general', '2023-07-10 17:30:00'),
+(7, '🎉 ¡El share "Equipamiento Deportivo" ha sido completado exitosamente! Todos los pagos han sido realizados. 🎯', 'general', '2023-07-10 17:30:00');
+
+-- Notificaciones recordatorias de pago
+INSERT INTO "notification" (id_user, message, type, date) VALUES
+-- Share 3: Fiesta de Cumpleaños - Recordatorios
+(8, '⏰ Recordatorio: Tienes un pago pendiente de $1040.00 en el share "Fiesta de Cumpleaños". ¡No olvides liquidarlo! 💸', 'debt', '2023-07-25 10:00:00'),
+(9, '⏰ Recordatorio: Tienes un pago pendiente de $1040.00 en el share "Fiesta de Cumpleaños". ¡No olvides liquidarlo! 💸', 'debt', '2023-07-25 10:00:00'),
+
+-- Share 4: Ahorro Vacaciones 2024 - Recordatorios
+(7, '⏰ Recordatorio: Tienes un pago pendiente de $5000.00 en el share "Ahorro Vacaciones 2024". ¡No olvides contribuir! 💰', 'goal', '2023-08-15 09:30:00'),
+(10, '⏰ Recordatorio: Tienes un pago pendiente de $5000.00 en el share "Ahorro Vacaciones 2024". ¡No olvides contribuir! 💰', 'goal', '2023-08-15 09:30:00'),
+
+-- Share 6: Sistema de Cine en Casa - Recordatorios
+(4, '⏰ Recordatorio: Tienes un pago pendiente de $1500.00 en el share "Sistema de Cine en Casa". ¡No olvides liquidarlo! 💸', 'debt', '2023-08-10 16:00:00'),
+(8, '⏰ Recordatorio: Tienes un pago pendiente de $1500.00 en el share "Sistema de Cine en Casa". ¡No olvides liquidarlo! 💸', 'debt', '2023-08-10 16:00:00'),
+(10, '⏰ Recordatorio: Tienes un pago pendiente de $1500.00 en el share "Sistema de Cine en Casa". ¡No olvides liquidarlo! 💸', 'debt', '2023-08-10 16:00:00'),
+
+-- Share 8: Deuda de Alquiler - Recordatorio
+(8, '⏰ Recordatorio: Aún tienes una deuda pendiente de $4000.00 en el share "Deuda de Alquiler". ¡Planifica tu próximo pago! 💰', 'debt', '2023-08-20 10:00:00');

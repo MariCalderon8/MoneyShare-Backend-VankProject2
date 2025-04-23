@@ -1,7 +1,8 @@
 class ShareSplitService {
 
-    constructor(shareSplitRepository) {
+    constructor(shareSplitRepository, notificationService) {
         this.shareSplitRepository = shareSplitRepository;
+        this.notificationService = notificationService;
     }
 
     async findSplitById(splitId) {
@@ -47,7 +48,9 @@ class ShareSplitService {
         if (splits.length === 0) {
             throw new Error("No hay splits para actualizar balances");
         }
-        
+        splits.forEach(split => {
+            this.notificationService.createNewExpenseNotification(split.id_user, userId, share.name, amount);
+        });
         // Actualizar el paid del usuario que hizo el gasto
         const userSplit = splits.find(split => {
             console.log(split.id_user);

@@ -1,10 +1,11 @@
 class ShareService {
 
-    constructor(shareRepository, shareSplitService, userService, shareMemberService) {
+    constructor(shareRepository, shareSplitService, userService, shareMemberService, notificationService) {
         this.shareRepository = shareRepository;
         this.shareSplitService = shareSplitService;
         this.userService = userService;
         this.shareMemberService = shareMemberService;
+        this.notificationService = notificationService;
     }
 
     async findShareById(id) {
@@ -44,6 +45,7 @@ class ShareService {
         shareData.code = code;
 
         let createShare = await this.shareRepository.createShare(shareData);
+        await this.notificationService.createShareExpenseNotification(shareData.id_creator, shareData.name);
         await this.addMember(code, userEmail);
 
         return createShare;
@@ -79,6 +81,9 @@ class ShareService {
         let share = await this.findShareByCode(code);
         if (!share) {
             throw new Error('Share no encontrado');
+        }
+        if (share.id_creator != userId) {
+            await this.notificationService.joinShareNotification(userId, share.name);
         }
         console.log(share.split_equally);
         await this.shareSplitService.createSplit(userId, share, share.split_equally);
@@ -175,6 +180,17 @@ class ShareService {
             balance: parseFloat(splitPaidUser.balance) - parseFloat(amountToPay)
         }, paidUserId, idShare);
 
+        const share = await this.findShareById(idShare);
+        if(!share) {
+            throw new Error("Share no encontrado");
+        }
+        const payingUser = await this.userService.findById(payingUserId);
+        const paidUser = await this.userService.findById(paidUserId);
+        if(!payingUser || !paidUser) {
+            throw new Error("Usuario no encontrado");
+        }
+        await this.notificationService.createMakePaymentNotification(payingUserId, share.name, paidUser.username, amountToPay);
+        await this.notificationService.createReceivePaymentNotification(paidUserId, share.name, payingUser.username, amountToPay);
     }
 
     async validateShareBeforePayment(idShare) {
