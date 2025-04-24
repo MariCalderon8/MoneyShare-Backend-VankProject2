@@ -163,10 +163,9 @@ class ShareService {
 
         const splitPayingUser = await this.findSplitByShareUser(idShare, payingUserId);
         const splitPaidUser = await this.findSplitByShareUser(idShare, paidUserId);
-        console.log(amountToPay);
-        console.log(splitPayingUser.paid);
-        console.log(splitPayingUser.assigned_amount);
-        if (parseFloat(amountToPay) + parseFloat(splitPayingUser.paid) > parseFloat(splitPayingUser.assigned_amount) || amountToPay > splitPaidUser.balance) {
+        
+        // El monto a pagar no exceda el balance del usuario que recibe el pago y que el usuario que paga no exceda su monto asignado
+        if (parseFloat(amountToPay) > parseFloat(splitPaidUser.balance) || parseFloat(amountToPay) + parseFloat(splitPayingUser.paid) > parseFloat(splitPayingUser.assigned_amount)) {
             throw new Error(`El monto excede el total a pagar`);
         }
 
