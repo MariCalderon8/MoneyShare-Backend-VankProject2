@@ -156,10 +156,10 @@ class ShareService {
     }
 
     // Aplica sólo para expenses (gastos) y debts (deudas)
-    async makePayment(idShare, amountToPay, payingUserEmail, paidUserId) {
+    async makePayment(idShare, amountToPay, payingUserId, paidUserId) {
         await this.validateShareBeforePayment(idShare);
-        await this.validateUsersBeforePayment(idShare, payingUserEmail, paidUserId);
-        const payingUserId = await this.userService.getIdByEmail(payingUserEmail);
+        await this.validateUsersBeforePayment(idShare, payingUserId, paidUserId);
+        //const payingUserId = await this.userService.getIdByEmail(payingUserEmail);
 
         const splitPayingUser = await this.findSplitByShareUser(idShare, payingUserId);
         const splitPaidUser = await this.findSplitByShareUser(idShare, paidUserId);
@@ -203,8 +203,8 @@ class ShareService {
         }
     }
 
-    async validateUsersBeforePayment(shareId, payingUserEmail, paidUserId) {
-        const payingUserId = await this.userService.getIdByEmail(payingUserEmail);
+    async validateUsersBeforePayment(shareId, payingUserId, paidUserId) {
+        //const payingUserId = await this.userService.getIdByEmail(payingUserEmail);
         const payingUser = await this.userService.findById(payingUserId);
         const paidUser = await this.userService.findById(paidUserId);
         if (!payingUser || !paidUser) {
