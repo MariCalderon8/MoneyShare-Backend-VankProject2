@@ -60,17 +60,17 @@ app.get("/health", (req, res) => {
   res.status(200).json({ status: "ok", timestamp: new Date().toISOString() })
 })
 
-// Middleware para manejar rutas no encontradas
-app.use((req, res) => {
-  res.status(404).json({ message: "Ruta no encontrada" })
-})
-
 app.use('/user', user);
 app.use('/share', share)
 app.use('/expense', expense);
 app.use('/share-split', shareSplit);
 app.use('/notification', notification);
 app.use('/ai-chat', aiChat);
+
+// Middleware para manejar rutas no encontradas
+app.use((req, res) => {
+  res.status(404).json({ message: "Ruta no encontrada" })
+})
 
 async function startServer() {
   try {
