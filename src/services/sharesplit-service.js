@@ -24,6 +24,12 @@ class ShareSplitService {
         return await this.shareSplitRepository.findSplitsByUser(userId);
     }
 
+    /**
+     * Crea un split para un usuario en un share (Cuando se añade un miembro o se crea un share)
+     * @param {string} idUser - El id del usuario
+     * @param {Object} share - El share
+     * @param {boolean} splitEqually - Si se debe dividir el monto igualmente
+     */
     async createSplit(idUser, share, splitEqually) {
         let split = await this.findSplitByUserShare(share.id_share, idUser);
         if(split) {
@@ -43,6 +49,12 @@ class ShareSplitService {
         return await this.shareSplitRepository.updateSplit(splitData, userId, shareId);
     }
 
+    /**
+     * Actualiza los splits luego de crear un gasto
+     * @param {Object} share - El share
+     * @param {string} userId - El id del usuario
+     * @param {number} amount - El monto del gasto
+     */
     async updateSplitsAfterExpense(share, userId, amount) {
         const splits = await this.findSplitsByShare(share.id_share);
         if (splits.length === 0) {
@@ -51,11 +63,13 @@ class ShareSplitService {
         splits.forEach(split => {
             this.notificationService.createNewExpenseNotification(split.id_user, userId, share.name, amount);
         });
-        // Actualizar el paid del usuario que hizo el gasto
+
+        // Encuentra el split del usuario que hizo el gasto
         const userSplit = splits.find(split => {
             return split.id_user === userId}
         );
 
+        // Actualiza el paid del usuario que hizo el gasto
         if (userSplit) {
             const newPaid = parseFloat(userSplit.paid) + parseFloat(amount);
             await this.updateSplit({
@@ -67,6 +81,10 @@ class ShareSplitService {
         
     }
 
+    /**
+     * Actualiza los splits luego de algun cambio y de acuerdo a los porcentajes establecidos para cada usuario
+     * @param {Object} share - El share
+     */
     async updateSplitData(share){
         const splits = await this.findSplitsByShare(share.id_share);
         if (splits.length === 0) {
@@ -86,6 +104,11 @@ class ShareSplitService {
         }
     }
 
+    /**
+     * Actualiza los porcentajes de los usuarios de un share
+     * @param {Object} share - El share
+     * @param {Object} percentages - Los porcentajes establecidos para cada usuario
+     */
     async modifyPercentage(share, percentages) {
         if (this.validatePercentages(percentages)) {
             for (const data of percentages) {
@@ -104,6 +127,10 @@ class ShareSplitService {
         }
     }
 
+    /**
+     * Valida que los porcentajes de los usuarios de un share sumen 100
+     * @param {Object} percentages - Los porcentajes establecidos para cada usuario
+     */
     validatePercentages(percentages) {
         const totalPercentage = percentages
             .map(v => Math.round(v.percentage * 10000)) // Convertir a enteros en centésimas
@@ -116,7 +143,10 @@ class ShareSplitService {
         return true;
     }
 
-    //Se llama al añadir un miembro, eliminar un split o al añadir un gasto 
+    /**
+     * Divide el monto del share entre los usuarios de un share (Cuando se añade un miembro o se crea un share)
+     * @param {Object} share - El share
+     */
     async splitEqually(share) {
         const splits = await this.findSplitsByShare(share.id_share);
 

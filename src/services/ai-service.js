@@ -8,6 +8,10 @@ class AIService {
         this.initChat();
     }
 
+    /**
+     * Genera el prompt inicial para el chat con el modelo de IA de Google (Gemini)
+     * @returns {string} - El prompt inicial
+     */
     generateInitialPrompt() {
         return `
             Eres un asistente financiero para la aplicacion MoneyShare que permite gestionar gastos compartidos entre grupos de personas. 
@@ -56,6 +60,9 @@ class AIService {
         `
     }
 
+    /**
+     * Inicializa el chat con el modelo de IA de Google (Gemini)
+     */
     initChat() {
         this.chat = this.ai.chats.create({
             model: "gemini-2.0-flash",
@@ -72,6 +79,11 @@ class AIService {
         });
     }
 
+    /**
+     * Envia un mensaje al chat con el modelo de IA de Google (Gemini)
+     * @param {string} prompt - El mensaje a enviar al chat
+     * @returns {Promise<string>} - La respuesta del modelo de IA
+     */
     async sendMessage(prompt) {
 
         const response = await this.chat.sendMessage({

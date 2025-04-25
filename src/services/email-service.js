@@ -1,5 +1,10 @@
 class EmailService {
 
+    /**
+     * Envia un correo electrónico de bienvenida
+     * @param {string} email - El correo electrónico del usuario
+     * @param {string} name - El nombre del usuario
+     */
     async sendWelcomeEmail(email, name) {
         const emailData = {
             subject: "¡Bienvenido a MoneyShare!",
@@ -15,6 +20,11 @@ class EmailService {
         }
     }
 
+    /**
+     * Envia un correo electrónico
+     * @param {Object} emailData - Los datos del correo electrónico a enviar
+     * @returns {Promise<string>} - La respuesta del correo electrónico
+     */
     async sendEmail(emailData) {
         const response = await fetch("https://send-email-function-ms.azurewebsites.net/api/emailservice", {
             method: "POST",

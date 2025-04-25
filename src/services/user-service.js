@@ -38,13 +38,21 @@ class UserService {
     return await this.userRepository.delete(id);
   }
 
+  /**
+   * Actualiza un usuario
+   * @param {string} idUser - El id del usuario
+   * @param {Object} data - Los datos del usuario
+   * @returns {Promise<Object>} - El usuario actualizado
+   */
   async updateUser(idUser, data) {
     let oldUser = await this.findById(idUser);
 
+    // Valida que el id del usuario no se pueda modificar
     if (data.id_user !== undefined && oldUser.id_user !== data.id_user) {
       throw new Error("El id no puede modificarse");
     }
 
+    // Valida que el correo no se pueda modificar
     if (data.email !== undefined && oldUser.email !== data.email) {
       const idExistente = await this.userRepository.getIdByEmail(data.email); // Agregar await
       if (idExistente) {
@@ -52,10 +60,12 @@ class UserService {
       }
     }
 
+    // Valida que el username no se pueda modificar
     if (data.username !== undefined && oldUser.username !== data.username) {
       throw new Error("El username no puede modificarse");
     }
 
+    // Valida que la contraseña se pueda modificar
     if (data.password !== undefined && oldUser.password !== data.password) {
       data.password = await bcrypt.hash(data.password, 10);
     }

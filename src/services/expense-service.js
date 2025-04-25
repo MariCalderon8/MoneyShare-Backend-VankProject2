@@ -36,6 +36,12 @@ class ExpenseService {
         return await this.expenseRepository.findExpensesByShareUser(shareId, userId);
     }
 
+    /**
+     * Crea un gasto
+     * @param {Object} expenseDTO - Los datos del gasto a crear
+     * @param {string} userEmail - El email del usuario que crea el gasto
+     * @returns {Promise<Object>} - El gasto creado
+     */
     async createExpense(expenseDTO, userEmail) {
         const userId = await this.userService.getIdByEmail(userEmail);
         if (!userId) {
@@ -45,12 +51,18 @@ class ExpenseService {
         
         const expense = await this.expenseRepository.createExpense(expenseDTO);        
         
-        // Para volver a recalcular los balances
+        // Recalcular los balances luego de crear el gasto
         await this.shareService.updateShareAfterExpense(expenseDTO.id_share, userId, expenseDTO.amount);
         
         return expense;
     }
 
+    /**
+     * Actualiza un gasto
+     * @param {Object} updateExpenseDTO - Los datos del gasto a actualizar
+     * @param {string} expenseID - El id del gasto a actualizar
+     * @returns {Promise<Object>} - El gasto actualizado
+     */
     async updateExpense(updateExpenseDTO, expenseID) {
         const originalExpense = await this.getExpenseByID(expenseID);
         if (!originalExpense) {
@@ -71,6 +83,11 @@ class ExpenseService {
         return updatedExpense;
     }
 
+    /**
+     * Elimina un gasto y actualiza el share y balances
+     * @param {string} expenseID - El id del gasto a eliminar
+     * @returns {Promise<Object>} - El gasto eliminado
+     */
     async deleteExpense(expenseID) {
         const expense = await this.getExpenseByID(expenseID);
         if (!expense) {
