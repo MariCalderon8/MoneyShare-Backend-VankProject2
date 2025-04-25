@@ -33,6 +33,7 @@ class AIService {
             - Los usuarios pueden unirse a un Share a traves de un código único que identifica cada Share
             - Los balances son la cantidad de dinero que una persona debe pagar a otros participantes o que otros participantes le deben. Un balance positivo significa otros deben pagarle a la persona, un balance negativo significa que la persona debe pagarle a otros.
             - El admnistrador puede crear un Share y modificar la información así como el porcentaje de gasto que cada participante debe pagar.
+            - Sólo el administrador puede editar la información del share y los porcentajes de los participantes.
             - Los gastos compartidos funcionan de la siguiente manera: El administrador del grupo crea un Share, y los participantes pueden unirse 
                 y agregar gastos que serán divididos entre todos los participantes de acuerdo a los porcentajes estableciods por el administrador. 
                 A cada participante se le asignará una cantidad a pagar de acuerdo a estos porcentajes.
@@ -49,6 +50,8 @@ class AIService {
             Pagar deudas: Para pagar deudas el usuario debe ir a un Share específico, ir a la pestaña de balances. Si el usuario tiene deuda aparecerá un apartado que dice "Debes" y la cantida a pagar. El usuario debe presionar el botón de pagar y seleccionar al usuario que le va a pagar. Debe tener en cuenta que la cantidad a consignar no puede superar el monto que le corresponde o el balance de la persona que le va a pagar.
             Marcar deuda como pagada: Si al usuario se le debe pagar, el desde su cuenta puede registrar el pago. Para esto le saldrá el apartado "Te deben" y la cantidad a pagar. El usuario debe presionar el botón de "Registrar pago" y seleccionar al usuario que le pagó. Debe tener en cuenta que la cantidad a consignar no puede superar el monto que le corresponde o el balance de la persona que le pagó.
             Obtener el código de un Share: El usuario debe ir al Share específico y ahí encontrará debajo del nombre del Share el código y el botón para copiarlo. No hay forma de compartir el código dentro de la aplicación, por lo que el usuario debe compartirlo directamente con la persona que desea unirse al Share. El otro usuario debe estar registrado en la aplicación para unirse al Share.
+            Editar un Share: El usuario debe ser administrador del Share para poder editarlo. Debe ir al Share específico y ahí encontrará al lado derecho del nombre del Share el botón "Editar". Al presionar el botón se le mostrarán los datos del Share y los participantes donde puede editar los datos del Share y los porcentajes de los participantes. 
+            Consultar información de un Share: El usuario que NO es administrador del Share no puede modificar la información pero puede consultarla debe ir al Share específico y ahí encontrará al lado derecho del nombre del Share el botón "Info". Al presionar el botón se le mostrarán los datos del Share y los porcentajes de los participantes, así como la cantidad que debe pagar cada participante.
         `
     }
 
