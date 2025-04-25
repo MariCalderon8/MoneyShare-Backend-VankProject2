@@ -64,28 +64,23 @@ class ShareSplitService {
             }, userId, share.id_share);
         }
         
-        if(share.split_equally) {
-            console.log('dividir gasto igual');
-            await this.splitEqually(share);
-        } else {
-            console.log('dividir diferente');
-            await this.updateSplitData(share);
-        }
+        console.log('dividir diferente');
+        await this.updateSplitData(share);
+        
     }
 
     async updateSplitData(share){
         const splits = await this.findSplitsByShare(share.id_share);
-
         if (splits.length === 0) {
             throw new Error("No hay splits para dividir el monto.");
         }
 
         for (const split of splits) {
             
-            let assignedAmount = (share.paid_amount * split.percentage) / 100;
+            let assignedAmount = (share.paid_amount * parseFloat(split.percentage)) / 100;
             let balance = split.paid - assignedAmount;
             let splitData = {
-                percentage: percentage,
+                percentage: split.percentage,
                 assigned_amount: assignedAmount,
                 balance: balance
             }
