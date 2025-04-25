@@ -18,7 +18,7 @@ class NotificationController {
 
     createWelcomeNotification = async (req, res) => {
         try {
-            await this.notificationService.createWelcomeNotification(req.dataToken.userEmail);
+            await this.notificationService.createWelcomeNotification(req.body.email);
             return res.status(200).json({ message: "Notificación creada correctamente" });
         } catch (error) {
             return res.status(500).json({ message: error.message });

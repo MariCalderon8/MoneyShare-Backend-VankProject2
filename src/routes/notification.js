@@ -20,6 +20,6 @@ router.get('/find/all', verifyToken, notificationController.findNotificationsByU
 router.get('/find/:id', verifyToken, notificationController.findNotificationByID);
 router.delete('/delete/:id', verifyToken, notificationController.deleteNotification);
 router.delete('/all', verifyToken, notificationController.deleteAllNotifications);
-router.post('/welcome', verifyToken, notificationController.createWelcomeNotification);
+router.post('/welcome', notificationController.createWelcomeNotification);
 
 export default router; 
