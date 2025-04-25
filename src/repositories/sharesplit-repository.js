@@ -37,7 +37,6 @@ class ShareSplitRepository {
     }
 
     async createSplit(userId, shareId) {
-        console.log(`en repositorio ${shareId}`);
         const split = await ShareSplit.create({
             id_user: userId,
             id_share: shareId

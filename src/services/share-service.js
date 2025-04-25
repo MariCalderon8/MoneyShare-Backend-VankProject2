@@ -34,7 +34,6 @@ class ShareService {
     }
 
     async createShare(shareData, userEmail) {
-        console.log(userEmail);
         shareData.id_creator = await this.userService.getIdByEmail(userEmail);
 
         let code;
@@ -85,7 +84,6 @@ class ShareService {
         if (share.id_creator != userId) {
             await this.notificationService.joinShareNotification(userId, share.name);
         }
-        console.log(share.split_equally);
         await this.shareSplitService.createSplit(userId, share, share.split_equally);
         return share;
     }

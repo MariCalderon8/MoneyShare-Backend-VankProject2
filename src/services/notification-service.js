@@ -38,8 +38,7 @@ class NotificationService {
     }
 
     async createMakePaymentNotification(idUser, shareName, userName, amount) {
-        console.log("createMakePaymentNotification");
-        console.log(idUser, shareName, userName, amount);
+
         const notification = {
             id_user: idUser,
             message: `✅ Pagaste $${amount} a ${userName} en el share "${shareName}" ¡Gracias por mantener todo al día! 📅`,

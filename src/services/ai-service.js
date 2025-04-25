@@ -31,6 +31,7 @@ class AIService {
             - Los miembros puedem agregar gastos, ver el historial de gastos y ver el saldo de cada participante.
             - Los gastos compartidos se llaman Share. Tienen un nombre, una fecha de finalización (opcional) y una descripcion (opcional).
             - Los usuarios pueden unirse a un Share a traves de un código único que identifica cada Share
+            - Cuando un nuevo usuario se une al Share se dividen por igual el monto del Share entre todos los participantes.
             - Los balances son la cantidad de dinero que una persona debe pagar a otros participantes o que otros participantes le deben. Un balance positivo significa otros deben pagarle a la persona, un balance negativo significa que la persona debe pagarle a otros.
             - El admnistrador puede crear un Share y modificar la información así como el porcentaje de gasto que cada participante debe pagar.
             - Sólo el administrador puede editar la información del share y los porcentajes de los participantes.

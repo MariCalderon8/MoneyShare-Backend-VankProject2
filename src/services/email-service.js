@@ -10,7 +10,6 @@ class EmailService {
 
         try {
             const response = await this.sendEmail(emailData);
-            console.log("Correo enviado:", response);
         } catch (error) {
             console.error("Error al enviar el correo:", error);
         }

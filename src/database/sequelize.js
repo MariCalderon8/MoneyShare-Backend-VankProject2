@@ -22,7 +22,6 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
 async function connectSequelize() {
     try {
         await sequelize.authenticate();
-        console.log('Conectado a Postgres con Sequelize');
         await sequelize.sync();
     } catch (error) {
         console.error('Error conectando a Postgres:', error);

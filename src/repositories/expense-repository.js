@@ -33,8 +33,6 @@ class ExpenseRepository {
     const [updatedRows] = await Expense.update(expenseData, {
       where: { id_expense: Number(expenseID) }
     });
-    console.log(expenseData, expenseID);
-    console.log(updatedRows);
 
     if (updatedRows > 0) {
       const updatedExpense = await Expense.findOne({

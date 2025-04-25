@@ -46,9 +46,7 @@ class ShareRepository {
         }
     }
 
-    //TODO: Modelo Share_member
     async addMember(share, userId){
-        console.log(userId);
         const ShareMember = sequelize.models.share_member;
         return await ShareMember.create({
             id_share: share.id_share,

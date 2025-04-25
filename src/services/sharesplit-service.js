@@ -53,7 +53,6 @@ class ShareSplitService {
         });
         // Actualizar el paid del usuario que hizo el gasto
         const userSplit = splits.find(split => {
-            console.log(split.id_user);
             return split.id_user === userId}
         );
 
@@ -64,7 +63,6 @@ class ShareSplitService {
             }, userId, share.id_share);
         }
         
-        console.log('dividir diferente');
         await this.updateSplitData(share);
         
     }
@@ -90,7 +88,6 @@ class ShareSplitService {
 
     async modifyPercentage(share, percentages) {
         if (this.validatePercentages(percentages)) {
-            console.log(percentages);
             for (const data of percentages) {
                 let split = await this.findSplitByUserShare(share.id_share, data.id_user);
                 let paidAmount = split.paid;
