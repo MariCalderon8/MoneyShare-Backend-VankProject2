@@ -21,10 +21,16 @@ const app = express()
   .use(bodyParser.json())
   .use(cookieParser(process.env.COOKIE_SECRET));
 
-app.use(cors({
-  origin: process.env.URL_FRONTEND || 'http://localhost:4200', // Permitir solo desde este origen
-  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'], // Permitir ciertos métodos
-  allowedHeaders: ['Content-Type', 'Authorization'] // Permitir ciertos encabezados
+appServer.use(cors({
+  origin: (origin, callback) => {
+      if (!origin || origin === process.env.URL_FRONTEND ) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+  methods: 'GET,POST,PUT,DELETE,HEAD,OPTIONS',
+  credentials: true,
 }));
 
 app.use('/user', user);
