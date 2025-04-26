@@ -27,39 +27,6 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization'] // Permitir ciertos encabezados
 }));
 
-// // Configuración de CORS para permitir solicitudes desde el frontend
-// app.use(
-//   cors({
-//     // Permitir solicitudes desde cualquier origen en desarrollo
-//     // En producción, especificar el dominio exacto del frontend
-//     origin: process.env.URL_FRONTEND || "*",
-//     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-//     allowedHeaders: ["Content-Type", "Authorization"],
-//     credentials: true, // Permitir cookies en solicitudes cross-origin
-//   }),
-// )
-
-// Ruta raíz para verificar que la API está funcionando
-// app.get("/", (req, res) => {
-//   res.status(200).json({
-//     message: "MoneyShare API está funcionando correctamente",
-//     version: "1.0.0",
-//     endpoints: {
-//       user: "/user",
-//       share: "/share",
-//       expense: "/expense",
-//       shareSplit: "/share-split",
-//       notification: "/notification",
-//       aiChat: "/ai-chat",
-//     },
-//   })
-// })
-
-// // Ruta de health check para monitoreo
-// app.get("/health", (req, res) => {
-//   res.status(200).json({ status: "ok", timestamp: new Date().toISOString() })
-// })
-
 app.use('/user', user);
 app.use('/share', share)
 app.use('/expense', expense);
