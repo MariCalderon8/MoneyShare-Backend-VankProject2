@@ -22,7 +22,7 @@ const registerValidator = [
     .withMessage('La contraseña debe tener al menos una letra mayúscula')
     .matches(/[0-9]/)
     .withMessage('La contraseña debe tener al menos un número')
-    .matches(/[!@#$%^&*(),.?":{}|<>]/)
+    .matches(/[!@#$%^&*()_+\-=\[\]{};'"\\|,.<>\/?]/)
     .withMessage('La contraseña debe tener al menos un caracter especial'),
 
     check('tel')
