@@ -21,7 +21,7 @@ const app = express()
   .use(bodyParser.json())
   .use(cookieParser(process.env.COOKIE_SECRET));
 
-appServer.use(cors({
+app.use(cors({
   origin: (origin, callback) => {
       if (!origin || origin === process.env.URL_FRONTEND ) {
         callback(null, true);
